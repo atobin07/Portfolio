@@ -83,14 +83,14 @@ const styles = `
   .nav-logo {
     font-size: 28px; font-weight: 800; letter-spacing: -0.05em;
     text-decoration: none;
-    display: flex; align-items: baseline; gap: 0;
+    display: flex; align-items: center; gap: 4px;
     line-height: 1;
   }
   .nav-logo .logo-a { color: var(--text2); }
-  .nav-logo .logo-t {
-    color: var(--accent);
-    font-size: 38px;
-    letter-spacing: -0.06em;
+  .nav-logo .logo-power-t {
+    display: inline-block;
+    width: 26px; height: 34px;
+    flex-shrink: 0;
   }
   .nav-links { display: flex; gap: 36px; }
   .nav-links button {
@@ -885,7 +885,10 @@ export default function Portfolio() {
       {/* Nav */}
       <nav className={scrolled ? "scrolled" : ""}>
         <a href="#hero" className="nav-logo" onClick={(e) => { e.preventDefault(); scrollTo("hero"); }}>
-          <span className="logo-a">A</span><span className="logo-t">T</span>
+          <span className="logo-a">A</span>
+          <svg className="nav-logo .logo-power-t" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{width:26,height:34,flexShrink:0}}>
+            <path d="M0 0 H400 V120 H260 V500 H140 V120 H0 Z" fill="#ff8200" />
+          </svg>
         </a>
         <div className="nav-links">
           {["skills", "work", "about"].map((p) => (
@@ -899,8 +902,8 @@ export default function Portfolio() {
       {/* HERO */}
       <section className="hero" id="hero">
         <div className="hero-grid" />
-        <svg className="hero-power-t" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M0 0 H400 V120 H260 V500 H140 V120 H0 Z" fill="var(--accent)" />
+        <svg className="hero-power-t" viewBox="0 0 400 480" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0 0 H400 V108 H252 V480 H148 V108 H0 Z" fill="var(--accent)" />
         </svg>
         <h1 className="hero-title">
           <div>Alexander</div>
