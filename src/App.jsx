@@ -239,10 +239,7 @@ const styles = `
     box-shadow: var(--card-shadow);
     transition: box-shadow 0.3s ease, transform 0.25s ease;
   }
-  /* Stripe: grey → orange → black, cycling every 3 */
-  .project-card.stripe-grey { background: #efefef; }
-  .project-card.stripe-orange { background: var(--accent); }
-  .project-card.stripe-black { background: #1a1a1a; }
+  /* Stripe: name text cycles grey → orange → black */
 
   .project-card:hover { box-shadow: var(--card-shadow-hover); }
   .project-card.expanded {
@@ -261,8 +258,6 @@ const styles = `
     font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
     color: var(--accent); opacity: 0.7;
   }
-  .stripe-orange .project-num { color: rgba(0,0,0,0.45); opacity: 1; }
-  .stripe-black .project-num { color: rgba(255,255,255,0.35); opacity: 1; }
 
   .project-name-wrap {}
   .project-name {
@@ -270,17 +265,15 @@ const styles = `
     margin-bottom: 5px; color: var(--text);
     transition: color 0.2s;
   }
-  .stripe-orange .project-name { color: #000; }
-  .stripe-black .project-name { color: #fff; }
-  .project-card.stripe-grey:hover .project-name { color: var(--accent); }
-  .project-card.stripe-orange:hover .project-name { color: rgba(0,0,0,0.65); }
-  .project-card.stripe-black:hover .project-name { color: var(--accent); }
+  /* Alternating name text colors */
+  .stripe-grey .project-name { color: var(--text2); }
+  .stripe-orange .project-name { color: var(--accent); }
+  .stripe-black .project-name { color: #1a1a1a; }
+  .project-card:hover .project-name { opacity: 0.75; }
 
   .project-tagline {
     font-size: 13px; color: var(--text2); line-height: 1.4; font-weight: 400;
   }
-  .stripe-orange .project-tagline { color: rgba(0,0,0,0.6); }
-  .stripe-black .project-tagline { color: rgba(255,255,255,0.55); }
 
   .project-tags {
     display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
@@ -291,22 +284,14 @@ const styles = `
     background: var(--bg3); border-radius: 100px;
     transition: color 0.2s, background 0.2s;
   }
-  .stripe-orange .tag { background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.65); }
-  .stripe-black .tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.55); }
-  .project-card.expanded .tag { background: rgba(255,130,0,0.12); color: var(--accent); }
-  .project-card.stripe-orange.expanded .tag { background: rgba(0,0,0,0.15); color: #000; }
-  .project-card.stripe-black.expanded .tag { background: rgba(255,130,0,0.2); color: var(--accent); }
+  .project-card.expanded .tag { background: rgba(255,130,0,0.1); color: var(--accent); }
 
   .expand-icon {
     font-size: 22px; color: var(--text3);
     transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), color 0.2s;
     width: 28px; text-align: center; font-weight: 300; line-height: 1;
   }
-  .stripe-orange .expand-icon { color: rgba(0,0,0,0.4); }
-  .stripe-black .expand-icon { color: rgba(255,255,255,0.35); }
   .project-card.expanded .expand-icon { transform: rotate(45deg); color: var(--accent); }
-  .project-card.stripe-orange.expanded .expand-icon { color: #000; }
-  .project-card.stripe-black.expanded .expand-icon { color: var(--accent); }
 
   /* Expanded content */
   .project-body {
@@ -321,30 +306,20 @@ const styles = `
     grid-template-columns: 1fr 260px;
     gap: 48px;
   }
-  .stripe-orange .project-body-inner { border-top-color: rgba(0,0,0,0.15); }
-  .stripe-black .project-body-inner { border-top-color: rgba(255,255,255,0.1); }
-
   .project-desc {
     font-size: 14px; line-height: 1.8; color: var(--text2);
     margin-top: 32px; margin-bottom: 24px;
   }
-  .stripe-orange .project-desc { color: rgba(0,0,0,0.65); }
-  .stripe-black .project-desc { color: rgba(255,255,255,0.6); }
-
   .project-highlights { list-style: none; }
   .project-highlights li {
     font-size: 13px; line-height: 1.7; color: var(--text2);
     padding: 10px 0; border-bottom: 1px solid var(--border);
     display: flex; gap: 14px; align-items: flex-start;
   }
-  .stripe-orange .project-highlights li { color: rgba(0,0,0,0.7); border-bottom-color: rgba(0,0,0,0.12); }
-  .stripe-black .project-highlights li { color: rgba(255,255,255,0.6); border-bottom-color: rgba(255,255,255,0.08); }
   .project-highlights li:last-child { border-bottom: none; }
   .project-highlights li::before {
     content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600;
   }
-  .stripe-orange .project-highlights li::before { color: rgba(0,0,0,0.5); }
-  .stripe-black .project-highlights li::before { color: var(--accent); }
   .project-links { margin-top: 28px; display: flex; gap: 12px; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
@@ -375,30 +350,13 @@ const styles = `
     text-transform: uppercase; color: var(--text3);
     margin-bottom: 16px;
   }
-  .stripe-orange .meta-group-label { color: rgba(0,0,0,0.4); }
-  .stripe-black .meta-group-label { color: rgba(255,255,255,0.3); }
-
   .meta-row {
     display: flex; justify-content: space-between; align-items: center;
     padding: 9px 0; border-bottom: 1px solid var(--border);
   }
-  .stripe-orange .meta-row { border-bottom-color: rgba(0,0,0,0.12); }
-  .stripe-black .meta-row { border-bottom-color: rgba(255,255,255,0.08); }
-
-  .meta-key {
-    font-size: 12px; font-weight: 500; color: var(--text3);
-  }
-  .stripe-orange .meta-key { color: rgba(0,0,0,0.45); }
-  .stripe-black .meta-key { color: rgba(255,255,255,0.35); }
-
-  .meta-val {
-    font-size: 12px; font-weight: 600; color: var(--text2); text-align: right;
-  }
-  .stripe-orange .meta-val { color: rgba(0,0,0,0.75); }
-  .stripe-black .meta-val { color: rgba(255,255,255,0.75); }
+  .meta-key { font-size: 12px; font-weight: 500; color: var(--text3); }
+  .meta-val { font-size: 12px; font-weight: 600; color: var(--text2); text-align: right; }
   .meta-val.accent { color: var(--accent); }
-  .stripe-orange .meta-val.accent { color: #000; }
-  .stripe-black .meta-val.accent { color: var(--accent); }
 
   .status-dot {
     display: inline-block; width: 6px; height: 6px;
