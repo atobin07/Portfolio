@@ -1,23 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 
 const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f0f2f5;
+    --bg: #f4f4f4;
     --bg2: #ffffff;
-    --bg3: #e4e9f0;
-    --border: #cdd3dc;
-    --border2: #b0bac8;
-    --text: #1c2b4a;
-    --text2: #5a6e8a;
-    --text3: #9baabe;
-    --accent: #1877f2;
-    --accent2: #a8c4f8;
-    --font-display: 'Syne', sans-serif;
-    --font-mono: 'DM Mono', monospace;
+    --bg3: #ebebeb;
+    --border: #d6d6d6;
+    --border2: #c0c0c0;
+    --text: #2b2b2b;
+    --text2: #585858;
+    --text3: #9a9a9a;
+    --accent: #ff8200;
+    --accent2: #ffc080;
+    --font-display: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'DM Sans', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
@@ -44,7 +44,7 @@ const styles = `
   .cursor-ring {
     position: fixed;
     width: 36px; height: 36px;
-    border: 1px solid rgba(24,119,242,0.4);
+    border: 1px solid rgba(255,130,0,0.4);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
@@ -75,7 +75,7 @@ const styles = `
   }
   nav.scrolled {
     border-color: var(--border);
-    background: rgba(240,242,245,0.92);
+    background: rgba(244,244,244,0.92);
     backdrop-filter: blur(12px);
   }
   .nav-logo {
@@ -107,8 +107,8 @@ const styles = `
   .hero-grid {
     position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(24,119,242,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(24,119,242,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(255,130,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,130,0,0.04) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
@@ -398,22 +398,22 @@ const styles = `
   /* DEMO CREDENTIALS */
   .demo-creds {
     margin-top: 20px;
-    border: 1px solid rgba(24,119,242,0.25);
+    border: 1px solid rgba(255,130,0,0.25);
     border-radius: 2px;
     overflow: hidden;
-    background: rgba(24,119,242,0.04);
+    background: rgba(255,130,0,0.04);
   }
   .demo-creds-label {
     font-family: var(--font-mono); font-size: 10px;
     letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--accent); padding: 10px 16px;
-    border-bottom: 1px solid rgba(24,119,242,0.15);
+    border-bottom: 1px solid rgba(255,130,0,0.15);
     display: flex; align-items: center; gap: 8px;
   }
   .demo-creds-row {
     display: flex; align-items: center; gap: 12px;
     padding: 8px 16px;
-    border-bottom: 1px solid rgba(24,119,242,0.08);
+    border-bottom: 1px solid rgba(255,130,0,0.08);
   }
   .demo-creds-row:last-child { border-bottom: none; }
   .demo-key {
@@ -887,7 +887,7 @@ export default function Portfolio() {
       {/* HERO */}
       <section className="hero" id="hero" style={{ minHeight: "100vh" }}>
         <div className="hero-grid" />
-        <div className="hero-eyebrow">Available for work · Virginia Beach, VA</div>
+        <div className="hero-eyebrow">Available for work</div>
         <h1 className="hero-title">
           <div>Alexander</div>
           <div className="line2">Tobin</div>
@@ -983,14 +983,6 @@ export default function Portfolio() {
                   <a href="mailto:atobin@alum.utk.edu">atobin@alum.utk.edu</a>
                 </span>
               </li>
-              <li className="contact-item">
-                <span className="contact-label">Phone</span>
-                <span className="contact-val">(757) 289-1204</span>
-              </li>
-              <li className="contact-item">
-                <span className="contact-label">Location</span>
-                <span className="contact-val">Virginia Beach, VA</span>
-              </li>
             </ul>
           </div>
           <div className="fade-in" style={{ transitionDelay: "0.15s" }}>
@@ -999,15 +991,14 @@ export default function Portfolio() {
                 Experience
               </div>
               {[
-                { role: "Freelance Developer & AI Consultant", co: "Self-employed", dates: "2026 – Present" },
-                { role: "Operations Manager", co: "Catalyzt Nutrition", dates: "2024 – 2026" },
-                { role: "Data Analyst / Project Manager", co: "Ferguson Enterprises", dates: "2022 – 2024" },
-                { role: "Smartsheet Admin & Analyst", co: "SiteLogiQ / IMS", dates: "2023 – 2024" },
+                { role: "Freelance Developer & AI Consultant", dates: "2026 – Present" },
+                { role: "Operations Manager", dates: "2024 – 2026" },
+                { role: "Data Analyst / Project Manager", dates: "2022 – 2024" },
+                { role: "Smartsheet Admin & Analyst", dates: "2023 – 2024" },
               ].map((e) => (
-                <div key={e.co} style={{ padding: "14px 0", borderBottom: "1px solid var(--border)" }}>
+                <div key={e.role} style={{ padding: "14px 0", borderBottom: "1px solid var(--border)" }}>
                   <div style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 600, marginBottom: "4px" }}>{e.role}</div>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text3)", display: "flex", justifyContent: "space-between" }}>
-                    <span>{e.co}</span>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text3)", display: "flex", justifyContent: "flex-end" }}>
                     <span>{e.dates}</span>
                   </div>
                 </div>
@@ -1020,7 +1011,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer>
         <p>© 2026 — Alexander Tobin</p>
-        <p>atobin@alum.utk.edu · (757) 289-1204</p>
+        <p>atobin@alum.utk.edu</p>
       </footer>
     </>
   );
