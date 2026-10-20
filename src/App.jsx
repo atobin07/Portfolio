@@ -123,7 +123,7 @@ const styles = `
     width: 32px; height: 1px; background: var(--accent);
   }
   .hero-title {
-    font-size: clamp(56px, 8vw, 120px);
+    font-size: clamp(48px, 7vw, 108px);
     font-weight: 800; line-height: 0.92;
     letter-spacing: -0.04em;
     margin-bottom: 40px;
@@ -135,8 +135,8 @@ const styles = `
     gap: 32px;
   }
   .hero-desc {
-    max-width: 400px;
-    font-family: var(--font-mono); font-size: 13px; line-height: 1.7;
+    max-width: 440px;
+    font-family: var(--font-mono); font-size: 13px; line-height: 1.8;
     color: var(--text2);
   }
   .hero-stats {
@@ -167,8 +167,47 @@ const styles = `
     50% { transform: translateX(-50%) translateY(6px); }
   }
 
+  /* SKILLS SECTION */
+  .skills-section { padding: 120px 48px; background: var(--bg2); min-height: auto; }
+  .skills-intro {
+    font-family: var(--font-mono); font-size: 13px; line-height: 1.8;
+    color: var(--text2); max-width: 560px; margin-bottom: 64px;
+  }
+  .skills-categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .skill-category {
+    padding: 32px 28px;
+    border: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .skill-category-title {
+    font-size: 10px; font-family: var(--font-mono);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border2);
+  }
+  .skill-item {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text2); line-height: 1;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-item::before {
+    content: ''; display: block;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--border2); flex-shrink: 0;
+  }
+  .skill-item.primary { color: var(--text); }
+  .skill-item.primary::before { background: var(--accent); }
+
   /* WORK section */
-  .work { padding: 120px 48px; }
+  .work { padding: 120px 48px; min-height: auto; }
   .section-header {
     display: flex; align-items: baseline; justify-content: space-between;
     margin-bottom: 64px;
@@ -245,7 +284,7 @@ const styles = `
     max-height: 0; overflow: hidden;
     transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .project-body.open { max-height: 800px; }
+  .project-body.open { max-height: 1000px; }
   .project-body-inner {
     padding: 0 32px 40px;
     border-top: 1px solid var(--border);
@@ -261,7 +300,7 @@ const styles = `
   .project-highlights { list-style: none; }
   .project-highlights li {
     font-family: var(--font-mono); font-size: 12px; line-height: 1.6;
-    color: var(--text2); padding: 6px 0;
+    color: var(--text2); padding: 8px 0;
     border-bottom: 1px solid var(--border);
     display: flex; gap: 12px; align-items: flex-start;
   }
@@ -319,8 +358,8 @@ const styles = `
     50% { opacity: 0.3; }
   }
 
-  /* ABOUT */
-  .about { padding: 120px 48px; background: var(--bg); }
+  /* ABOUT / CONTACT */
+  .about { padding: 120px 48px; background: var(--bg); min-height: auto; }
   .about-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 96px;
     align-items: start;
@@ -333,36 +372,28 @@ const styles = `
   .about-heading span { color: var(--accent); }
   .about-text {
     font-family: var(--font-mono); font-size: 13px; line-height: 1.9;
-    color: var(--text2); margin-bottom: 16px;
+    color: var(--text2); margin-bottom: 20px;
   }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
-  .skill-block {
-    padding: 20px;
-    border: 1px solid var(--border);
-    border-radius: 1px;
+  .contact-list { margin-top: 40px; list-style: none; }
+  .contact-item {
+    display: flex; align-items: baseline; gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
   }
-  .skill-block-title {
-    font-size: 10px; font-family: var(--font-mono);
+  .contact-label {
+    font-family: var(--font-mono); font-size: 10px;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 12px;
+    color: var(--text3); width: 80px; flex-shrink: 0;
   }
-  .skill-list {
-    font-family: var(--font-mono); font-size: 11px;
-    color: var(--text2); line-height: 2;
+  .contact-val {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text2);
   }
-
-  
-
-  /* FOOTER */
-  footer {
-    padding: 32px 48px;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
+  .contact-val a {
+    color: var(--text2); text-decoration: none;
+    transition: color 0.2s;
   }
-  footer p {
-    font-family: var(--font-mono); font-size: 11px;
-    color: var(--text3); letter-spacing: 0.05em;
-  }
+  .contact-val a:hover { color: var(--accent); }
 
   /* DEMO CREDENTIALS */
   .demo-creds {
@@ -402,49 +433,114 @@ const styles = `
   .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text3); letter-spacing: 0.05em;
+  }
+
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
     .hero { padding: 0 24px 64px; }
     .hero-bottom { flex-direction: column; align-items: flex-start; }
     .hero-stats { gap: 32px; }
-    .work, .about, .contact { padding: 80px 24px; }
+    .work, .about, .skills-section { padding: 80px 24px; }
     .project-header { grid-template-columns: 32px 1fr auto; gap: 12px; }
     .project-tags { display: none; }
     .project-body-inner { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .skills-categories { grid-template-columns: 1fr 1fr; }
     footer { flex-direction: column; gap: 8px; text-align: center; }
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
   }
+
+  @media (max-width: 480px) {
+    .skills-categories { grid-template-columns: 1fr; }
+  }
 `;
+
+const SKILL_GROUPS = [
+  {
+    title: "AI & Automation",
+    skills: [
+      { name: "Claude API", primary: true },
+      { name: "OpenAI API", primary: true },
+      { name: "Airtable Automations", primary: true },
+      { name: "Airtable Scripting (JS)" },
+      { name: "Zapier" },
+      { name: "Power Automate" },
+      { name: "Smartsheet Automations" },
+    ],
+  },
+  {
+    title: "Full-Stack Dev",
+    skills: [
+      { name: "Next.js / React", primary: true },
+      { name: "TypeScript", primary: true },
+      { name: "Supabase + PostgreSQL", primary: true },
+      { name: "Tailwind CSS" },
+      { name: "Vercel" },
+      { name: "Supabase Edge Functions" },
+      { name: "Row-Level Security (RLS)" },
+    ],
+  },
+  {
+    title: "Data & Analytics",
+    skills: [
+      { name: "Power BI", primary: true },
+      { name: "SQL", primary: true },
+      { name: "GA4 / Google Analytics" },
+      { name: "KPI Dashboard Design" },
+      { name: "Excel / VBA" },
+      { name: "Azure DevOps" },
+      { name: "Data Validation & QA" },
+    ],
+  },
+  {
+    title: "Platforms & Infra",
+    skills: [
+      { name: "Airtable", primary: true },
+      { name: "Stripe (Payments)" },
+      { name: "Resend / Web Push" },
+      { name: "GitHub Actions / CI-CD" },
+      { name: "AWS" },
+      { name: "Azure" },
+      { name: "Smartsheet" },
+    ],
+  },
+];
 
 const PROJECTS = [
   {
     id: 1,
     num: "01",
     name: "Capitol Mirror",
-    tagline: "Congressional stock trading tracker — STOCK Act disclosures turned into investment intelligence",
+    tagline: "Full-stack SaaS — congressional trade data turned into a subscription data product",
     tags: ["Next.js", "TypeScript", "Stripe", "Supabase"],
     description:
-      "Nancy Pelosi's stock picks beat the S&P 500 by 68% last year. Capitol Mirror tells you what she's buying before the news does. A full-stack SaaS that converts public STOCK Act government filings into a subscription data product — covering all 538 Congress members with deep analytics, copy-trade tooling, and a full Stripe paywall.",
+      "A full-stack SaaS that pulls public STOCK Act government filings and turns them into a searchable, subscribable data product covering all 538 Congress members. Built solo from schema design to Stripe paywall to automated data pipeline.",
     highlights: [
-      "Live trade feed across all 538 Congress members in real time",
-      "Conflict of Interest scoring — cross-references committee memberships against holdings",
-      "Copy Trading — one-tap broker deep-links (Robinhood, Webull, Fidelity, Schwab)",
-      "Full Stripe paywall: Free / Pro $30 / Pro+ $65 with 7-day trial & billing portal",
-      "Automated GitHub Actions pipeline bypasses government IP blocks daily",
-      "Deep analytics: trade volume, party breakdowns, sector allocation, cumulative P&L",
-      "Web Push notifications — alerts the moment a new trade is filed",
-      "Custom watchlist boards per Congress member",
+      "Designed and implemented the full PostgreSQL schema — trades, members, committees, watchlists",
+      "Built an automated GitHub Actions pipeline to fetch and parse government filings daily",
+      "Integrated Stripe with Free / Pro $30 / Pro+ $65 tiers, billing portal, and 7-day trial logic",
+      "Implemented Conflict of Interest scoring by cross-referencing committee memberships against holdings",
+      "Web Push notifications via service worker — alerts fire the moment a new trade is filed",
+      "Supabase RLS policies enforce per-subscriber data access at the database level",
+      "Copy Trading feature generates broker deep-links (Robinhood, Webull, Fidelity, Schwab)",
     ],
     meta: [
-      { key: "Model", val: "Free / $30 / $65 /mo", accent: true },
-      { key: "Status", val: "Live in production", live: true },
       { key: "Type", val: "SaaS / Data Product" },
       { key: "Stack", val: "Next.js 16 + TypeScript" },
       { key: "Backend", val: "Supabase + PostgreSQL" },
       { key: "Payments", val: "Stripe" },
-      { key: "Deploy", val: "DigitalOcean + PM2" },
+      { key: "Pipeline", val: "GitHub Actions (daily)", accent: true },
+      { key: "Status", val: "Live in production", live: true },
     ],
     liveUrl: "http://45.55.38.251",
     githubUrl: null,
@@ -454,25 +550,24 @@ const PROJECTS = [
     id: 2,
     num: "02",
     name: "Container Tracker",
-    tagline: "Real-time freight container tracking with live shipping data",
+    tagline: "Logistics tool — real-time freight container tracking with live shipping API",
     tags: ["React", "Supabase", "Vercel", "API"],
     description:
-      "A full-stack logistics tool for tracking freight containers across their entire journey — from origin port through customs, drayage, and final delivery. Add a container number and the app pulls live shipping data, then tracks it automatically as it moves around the world.",
+      "A full-stack logistics app for tracking freight containers across their full journey. Add a container number and the app pulls live shipping data from a third-party API, then persists and auto-updates status as the container moves.",
     highlights: [
-      "Built from zero to functional full-stack app in 1–2 days",
-      "Live shipping API integration — real container data on demand",
-      "6-stage status pipeline: Origin → In Transit → Destination → Customs → Drayage → Delivered",
-      "Dashboard stat cards give instant fleet-wide status overview",
+      "Integrated a live shipping API — pulls real container data on demand by container number",
+      "Designed the 6-stage status pipeline: Origin → In Transit → Destination → Customs → Drayage → Delivered",
+      "Built full CRUD with Supabase — records persist and update as containers progress",
+      "Dashboard stat cards aggregate fleet-wide status in real time",
       "Add container modal captures vessel, ports, bill of lading, ETA, and notes",
-      "Supabase backend with full CRUD — data persists and updates as containers move",
     ],
     meta: [
-      { key: "Timeline", val: "1–2 days", accent: true },
-      { key: "Status", val: "Live (beta)", live: true },
       { key: "Type", val: "Logistics / B2B Tool" },
       { key: "Stack", val: "React + Vite" },
       { key: "Backend", val: "Supabase" },
       { key: "Deploy", val: "Vercel" },
+      { key: "Timeline", val: "1–2 days", accent: true },
+      { key: "Status", val: "Live (beta)", live: true },
     ],
     liveUrl: "https://container-tracker-beta.vercel.app/",
     githubUrl: null,
@@ -573,7 +668,6 @@ export default function Portfolio() {
   const [activePage, setActivePage] = useState("work");
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [cursorExpanded, setCursorExpanded] = useState(false);
-  const cursorRef = useRef(null);
   const ringRef = useRef(null);
 
   useEffect(() => {
@@ -593,11 +687,10 @@ export default function Portfolio() {
         ringRef.current.style.top = ringY - 18 + "px";
       }
     };
-    const raf = () => { requestAnimationFrame(raf); };
-    requestAnimationFrame(raf);
+    requestAnimationFrame(function raf() { requestAnimationFrame(raf); });
     document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseenter", (e) => {
-      if (e.target.matches("a,button,.project-header,.contact-link,.btn-primary,.btn-secondary")) {
+    document.addEventListener("mouseover", (e) => {
+      if (e.target.matches("a,button,.project-header,.btn-primary,.btn-secondary")) {
         setCursorExpanded(true);
       } else {
         setCursorExpanded(false);
@@ -606,7 +699,6 @@ export default function Portfolio() {
     return () => document.removeEventListener("mousemove", onMove);
   }, []);
 
-  // Fade-in observer
   useEffect(() => {
     const els = document.querySelectorAll(".fade-in");
     const obs = new IntersectionObserver(
@@ -639,10 +731,10 @@ export default function Portfolio() {
       {/* Nav */}
       <nav className={scrolled ? "scrolled" : ""}>
         <a href="#hero" className="nav-logo" onClick={(e) => { e.preventDefault(); scrollTo("hero"); }}>
-          Port<span>.</span>
+          AT<span>.</span>
         </a>
         <div className="nav-links">
-          {["work", "about"].map((p) => (
+          {["skills", "work", "about"].map((p) => (
             <button
               key={p}
               className={activePage === p ? "active" : ""}
@@ -657,22 +749,23 @@ export default function Portfolio() {
       {/* HERO */}
       <section className="hero" id="hero" style={{ minHeight: "100vh" }}>
         <div className="hero-grid" />
-        <div className="hero-eyebrow">Available for work</div>
+        <div className="hero-eyebrow">Available for work · Virginia Beach, VA</div>
         <h1 className="hero-title">
-          <div>Building</div>
-          <div className="line2">things that</div>
-          <div><span className="accent">ship.</span></div>
+          <div>Alexander</div>
+          <div className="line2">Tobin</div>
+          <div><span className="accent">Developer.</span></div>
         </h1>
         <div className="hero-bottom">
           <p className="hero-desc">
-            Full-stack developer focused on product-quality execution.
-            I build SaaS platforms, apps, and tools — from concept to
-            live production.
+            Full-stack developer and AI integration specialist. I build production
+            applications, automate business workflows, and wire AI into systems
+            that replace manual work. 4+ years delivering end-to-end across dev,
+            data, and automation.
           </p>
           <div className="hero-stats">
             <div className="stat-item">
               <div className="stat-num">4+</div>
-              <div className="stat-label">Years shipping</div>
+              <div className="stat-label">Years delivering</div>
             </div>
             <div className="stat-item">
               <div className="stat-num">5</div>
@@ -687,18 +780,43 @@ export default function Portfolio() {
         <div className="scroll-indicator">Scroll</div>
       </section>
 
+      {/* SKILLS */}
+      <section className="skills-section" id="skills">
+        <div className="section-header fade-in">
+          <span className="section-title">Technical Skills</span>
+          <span className="section-num">Demonstrated in production</span>
+        </div>
+        <p className="about-text fade-in" style={{ maxWidth: 560, marginBottom: 48 }}>
+          Skills listed here have been applied in shipped work — production apps,
+          client automation systems, or employer analytics environments. Highlighted
+          items are primary strengths.
+        </p>
+        <div className="skills-categories fade-in">
+          {SKILL_GROUPS.map((group) => (
+            <div key={group.title} className="skill-category">
+              <div className="skill-category-title">{group.title}</div>
+              {group.skills.map((s) => (
+                <div key={s.name} className={`skill-item ${s.primary ? "primary" : ""}`}>
+                  {s.name}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* WORK */}
       <section className="work" id="work">
         <div className="section-header fade-in">
           <span className="section-title">Selected Work</span>
-          <span className="section-num">{PROJECTS.length} project{PROJECTS.length !== 1 ? "s" : ""}</span>
+          <span className="section-num">{PROJECTS.length} projects</span>
         </div>
         {PROJECTS.map((p, i) => (
           <ProjectCard key={p.id} project={p} index={i} />
         ))}
         <div style={{ marginTop: 48, padding: "32px", border: "1px dashed var(--border)", borderRadius: "1px", textAlign: "center" }} className="fade-in">
           <p style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text3)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-            More projects coming soon
+            Additional projects available on request
           </p>
         </div>
       </section>
@@ -708,28 +826,52 @@ export default function Portfolio() {
         <div className="about-grid">
           <div className="fade-in">
             <h2 className="about-heading">
-              About<br /><span>me.</span>
+              Contact<br /><span>me.</span>
             </h2>
             <p className="about-text">
-              I'm a full-stack developer who cares about shipping. I build production-ready
-              products with modern stacks — fast, clean, and with real attention to UX detail.
+              I scope, build, and deliver — solo or inside a team. Comfortable
+              taking a vague problem all the way through to a working system, with
+              documentation the next person can actually maintain.
             </p>
             <p className="about-text">
-              I work at the intersection of frontend craft and backend systems — comfortable
-              designing the UI, modeling the database, and deploying the infrastructure.
+              Background spans full-stack development, AI and workflow automation,
+              and data analytics. University of Tennessee, Knoxville. Google Project
+              Management and Analytics certified.
             </p>
+            <ul className="contact-list">
+              <li className="contact-item">
+                <span className="contact-label">Email</span>
+                <span className="contact-val">
+                  <a href="mailto:atobin@alum.utk.edu">atobin@alum.utk.edu</a>
+                </span>
+              </li>
+              <li className="contact-item">
+                <span className="contact-label">Phone</span>
+                <span className="contact-val">(757) 289-1204</span>
+              </li>
+              <li className="contact-item">
+                <span className="contact-label">Location</span>
+                <span className="contact-val">Virginia Beach, VA</span>
+              </li>
+            </ul>
           </div>
           <div className="fade-in" style={{ transitionDelay: "0.15s" }}>
-            <div className="skills-grid">
+            <div style={{ padding: "32px", border: "1px solid var(--border)", background: "var(--bg2)", marginTop: "0" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "24px", paddingBottom: "16px", borderBottom: "1px solid var(--border2)" }}>
+                Experience
+              </div>
               {[
-                { title: "Frontend", skills: "React 18, Next.js 16\nTailwind CSS v4\nTypeScript / PWA" },
-                { title: "Backend", skills: "Supabase (Postgres)\nEdge Functions (Deno)\nRLS + Auth" },
-                { title: "Infra", skills: "Vercel\nSupabase Cloud\nCI / CD" },
-                { title: "Integrations", skills: "Stripe payments\nResend / Web Push\nGitHub Actions" },
-              ].map((s) => (
-                <div key={s.title} className="skill-block">
-                  <div className="skill-block-title">{s.title}</div>
-                  <div className="skill-list" style={{ whiteSpace: "pre-line" }}>{s.skills}</div>
+                { role: "Freelance Developer & AI Consultant", co: "Self-employed", dates: "2026 – Present" },
+                { role: "Operations Manager", co: "Catalyzt Nutrition", dates: "2024 – 2026" },
+                { role: "Data Analyst / Project Manager", co: "Ferguson Enterprises", dates: "2022 – 2024" },
+                { role: "Smartsheet Admin & Analyst", co: "SiteLogiQ / IMS", dates: "2023 – 2024" },
+              ].map((e) => (
+                <div key={e.co} style={{ padding: "14px 0", borderBottom: "1px solid var(--border)" }}>
+                  <div style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 600, marginBottom: "4px" }}>{e.role}</div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--text3)", display: "flex", justifyContent: "space-between" }}>
+                    <span>{e.co}</span>
+                    <span>{e.dates}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -739,8 +881,8 @@ export default function Portfolio() {
 
       {/* Footer */}
       <footer>
-        <p>© 2026 — Portfolio</p>
-        <p>Built with React · Designed to ship</p>
+        <p>© 2026 — Alexander Tobin</p>
+        <p>atobin@alum.utk.edu · (757) 289-1204</p>
       </footer>
     </>
   );
