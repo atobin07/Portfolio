@@ -103,6 +103,7 @@ const styles = `
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: 0 48px 80px;
     position: relative; overflow: hidden;
+    min-height: 100vh;
   }
   .hero-grid {
     position: absolute; inset: 0;
@@ -112,31 +113,30 @@ const styles = `
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
-  .hero-eyebrow {
-    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
-    color: var(--accent); text-transform: uppercase;
-    margin-bottom: 24px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .hero-eyebrow::before {
-    content: ''; display: block;
-    width: 32px; height: 1px; background: var(--accent);
+  .hero-power-t {
+    position: absolute; right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: clamp(320px, 42vw, 680px);
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
   }
   .hero-title {
-    font-size: clamp(48px, 7vw, 108px);
-    font-weight: 800; line-height: 0.92;
+    font-size: clamp(72px, 13vw, 200px);
+    font-weight: 800; line-height: 0.88;
     letter-spacing: -0.04em;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
+    position: relative; z-index: 1;
   }
   .hero-title .line2 { color: var(--text2); }
   .hero-title .accent { color: var(--accent); }
   .hero-bottom {
     display: flex; align-items: flex-end; justify-content: space-between;
-    gap: 32px;
+    gap: 32px; position: relative; z-index: 1;
   }
   .hero-desc {
-    max-width: 440px;
-    font-family: var(--font-mono); font-size: 13px; line-height: 1.8;
+    max-width: 480px;
+    font-size: 15px; line-height: 1.8;
     color: var(--text2);
   }
   .hero-stats {
@@ -144,11 +144,11 @@ const styles = `
   }
   .stat-item { text-align: right; }
   .stat-num {
-    font-size: 32px; font-weight: 800; letter-spacing: -0.04em;
+    font-size: 40px; font-weight: 800; letter-spacing: -0.04em;
     color: var(--text); line-height: 1;
   }
   .stat-label {
-    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em;
+    font-size: 10px; letter-spacing: 0.1em;
     color: var(--text3); text-transform: uppercase; margin-top: 4px;
   }
   .scroll-indicator {
@@ -885,9 +885,12 @@ export default function Portfolio() {
       </nav>
 
       {/* HERO */}
-      <section className="hero" id="hero" style={{ minHeight: "100vh" }}>
+      <section className="hero" id="hero">
         <div className="hero-grid" />
-        <div className="hero-eyebrow">Available for work</div>
+        {/* Power T watermark */}
+        <svg className="hero-power-t" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0 0 H400 V120 H260 V500 H140 V120 H0 Z" fill="var(--accent)" />
+        </svg>
         <h1 className="hero-title">
           <div>Alexander</div>
           <div className="line2">Tobin</div>
@@ -896,9 +899,8 @@ export default function Portfolio() {
         <div className="hero-bottom">
           <p className="hero-desc">
             Full-stack developer and AI integration specialist. I build production
-            applications, automate business workflows, and wire AI into systems
-            that replace manual work. 4+ years delivering end-to-end across dev,
-            data, and automation.
+            apps, automate workflows, and wire AI into systems that replace manual
+            work. Select clients only — if you want results, you come to me.
           </p>
           <div className="hero-stats">
             <div className="stat-item">
@@ -964,12 +966,12 @@ export default function Portfolio() {
         <div className="about-grid">
           <div className="fade-in">
             <h2 className="about-heading">
-              Contact<br /><span>me.</span>
+              Work with<br /><span>Alexander.</span>
             </h2>
             <p className="about-text">
-              I scope, build, and deliver — solo or inside a team. Comfortable
-              taking a vague problem all the way through to a working system, with
-              documentation the next person can actually maintain.
+              I don't take every engagement. If you need someone to scope a problem,
+              build it end-to-end, and hand it off production-ready — reach out and
+              make the case. The right projects get my full attention.
             </p>
             <p className="about-text">
               Background spans full-stack development, AI and workflow automation,
