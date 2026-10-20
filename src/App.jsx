@@ -422,33 +422,6 @@ const PROJECTS = [
   {
     id: 1,
     num: "01",
-    name: "AdvisoryCloud 3.0",
-    tagline: "SaaS platform connecting founders with expert advisors",
-    tags: ["React", "Supabase", "Tailwind", "PWA"],
-    description:
-      "A mobile-first SaaS platform that democratizes access to expert advisory boards — built from zero to production-ready MVP in 7 days. Companies can create advisory boards, discover and invite advisors, share updates via a live post feed, and communicate via real-time messaging.",
-    highlights: [
-      "Built from zero to production MVP in 7 days",
-      "Real-time direct and group messaging via Supabase Realtime",
-      "15+ database tables with row-level security (RLS)",
-      "Mobile-first PWA — installable on iOS & Android",
-      "Supabase Edge Functions (Deno) for server-side logic",
-      "Email invite system via Resend API",
-    ],
-    meta: [
-      { key: "Timeline", val: "7 days", accent: true },
-      { key: "Status", val: "Live in production", live: true },
-      { key: "Type", val: "SaaS / MVP" },
-      { key: "Stack", val: "React 18 + Vite" },
-      { key: "Backend", val: "Supabase + Edge Fn" },
-      { key: "Deploy", val: "Vercel" },
-    ],
-    liveUrl: "https://advisory-cloud3-0-d5mm.vercel.app/",
-    githubUrl: null,
-  },
-  {
-    id: 2,
-    num: "02",
     name: "Capitol Mirror",
     tagline: "Congressional stock trading tracker — STOCK Act disclosures turned into investment intelligence",
     tags: ["Next.js", "TypeScript", "Stripe", "Supabase"],
@@ -478,8 +451,8 @@ const PROJECTS = [
     demo: { email: "demo@capitolmirror.app", password: "Demo1234!" },
   },
   {
-    id: 3,
-    num: "03",
+    id: 2,
+    num: "02",
     name: "Container Tracker",
     tagline: "Real-time freight container tracking with live shipping data",
     tags: ["React", "Supabase", "Vercel", "API"],
@@ -698,16 +671,16 @@ export default function Portfolio() {
           </p>
           <div className="hero-stats">
             <div className="stat-item">
-              <div className="stat-num">7</div>
-              <div className="stat-label">Days to MVP</div>
+              <div className="stat-num">4+</div>
+              <div className="stat-label">Years shipping</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">3</div>
-              <div className="stat-label">Projects live</div>
+              <div className="stat-num">5</div>
+              <div className="stat-label">Apps in production</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">538</div>
-              <div className="stat-label">Congress members tracked</div>
+              <div className="stat-num">2</div>
+              <div className="stat-label">AI APIs integrated</div>
             </div>
           </div>
         </div>
@@ -740,11 +713,6 @@ export default function Portfolio() {
             <p className="about-text">
               I'm a full-stack developer who cares about shipping. I build production-ready
               products with modern stacks — fast, clean, and with real attention to UX detail.
-            </p>
-            <p className="about-text">
-              AdvisoryCloud 3.0 went from idea to live production MVP in 7 days — complete
-              with real-time messaging, authentication, mobile PWA support, and a full
-              database schema. That's the standard I hold myself to.
             </p>
             <p className="about-text">
               I work at the intersection of frontend craft and backend systems — comfortable
