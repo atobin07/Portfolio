@@ -79,11 +79,17 @@ const styles = `
     backdrop-filter: blur(12px);
   }
   .nav-logo {
-    font-size: 18px; font-weight: 800; letter-spacing: -0.03em;
-    color: var(--text);
+    font-size: 28px; font-weight: 800; letter-spacing: -0.05em;
     text-decoration: none;
+    display: flex; align-items: baseline; gap: 0;
+    line-height: 1;
   }
-  .nav-logo span { color: var(--accent); }
+  .nav-logo .logo-a { color: var(--text2); }
+  .nav-logo .logo-t {
+    color: var(--accent);
+    font-size: 36px;
+    letter-spacing: -0.06em;
+  }
   .nav-links { display: flex; gap: 32px; }
   .nav-links button {
     background: none; border: none; color: var(--text2);
@@ -869,7 +875,7 @@ export default function Portfolio() {
       {/* Nav */}
       <nav className={scrolled ? "scrolled" : ""}>
         <a href="#hero" className="nav-logo" onClick={(e) => { e.preventDefault(); scrollTo("hero"); }}>
-          AT<span>.</span>
+          <span className="logo-a">A</span><span className="logo-t">T</span>
         </a>
         <div className="nav-links">
           {["skills", "work", "about"].map((p) => (
