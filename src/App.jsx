@@ -436,7 +436,7 @@ const styles = `
   }
 
   /* Fade-in animation */
-  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in { opacity: 0; transform: translateY(12px); transition: opacity 0.35s ease, transform 0.35s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   /* FOOTER */
@@ -725,7 +725,7 @@ function ProjectCard({ project, index }) {
   return (
     <div
       className={`project-card fade-in ${open ? "expanded" : ""}`}
-      style={{ transitionDelay: `${index * 0.1}s` }}
+      style={{ transitionDelay: `${index * 0.05}s` }}
     >
       <div className="project-header" onClick={() => setOpen(!open)}>
         <span className="project-num">{project.num}</span>
@@ -846,8 +846,8 @@ export default function Portfolio() {
   useEffect(() => {
     const els = document.querySelectorAll(".fade-in");
     const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.1 }
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } }),
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
