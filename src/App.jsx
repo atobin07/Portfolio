@@ -6,16 +6,16 @@ const styles = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #161616;
-    --border: #222222;
-    --border2: #2a2a2a;
-    --text: #f0f0f0;
-    --text2: #888888;
-    --text3: #444444;
-    --accent: #e8ff47;
-    --accent2: #47ffe8;
+    --bg: #f0f2f5;
+    --bg2: #ffffff;
+    --bg3: #e4e9f0;
+    --border: #cdd3dc;
+    --border2: #b0bac8;
+    --text: #1c2b4a;
+    --text2: #5a6e8a;
+    --text3: #9baabe;
+    --accent: #1877f2;
+    --accent2: #a8c4f8;
     --font-display: 'Syne', sans-serif;
     --font-mono: 'DM Mono', monospace;
   }
@@ -44,7 +44,7 @@ const styles = `
   .cursor-ring {
     position: fixed;
     width: 36px; height: 36px;
-    border: 1px solid rgba(232,255,71,0.4);
+    border: 1px solid rgba(24,119,242,0.4);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
@@ -75,7 +75,7 @@ const styles = `
   }
   nav.scrolled {
     border-color: var(--border);
-    background: rgba(10,10,10,0.85);
+    background: rgba(240,242,245,0.92);
     backdrop-filter: blur(12px);
   }
   .nav-logo {
@@ -107,8 +107,8 @@ const styles = `
   .hero-grid {
     position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(232,255,71,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232,255,71,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(24,119,242,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(24,119,242,0.04) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
@@ -398,22 +398,22 @@ const styles = `
   /* DEMO CREDENTIALS */
   .demo-creds {
     margin-top: 20px;
-    border: 1px solid rgba(232,255,71,0.25);
+    border: 1px solid rgba(24,119,242,0.25);
     border-radius: 2px;
     overflow: hidden;
-    background: rgba(232,255,71,0.04);
+    background: rgba(24,119,242,0.04);
   }
   .demo-creds-label {
     font-family: var(--font-mono); font-size: 10px;
     letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--accent); padding: 10px 16px;
-    border-bottom: 1px solid rgba(232,255,71,0.15);
+    border-bottom: 1px solid rgba(24,119,242,0.15);
     display: flex; align-items: center; gap: 8px;
   }
   .demo-creds-row {
     display: flex; align-items: center; gap: 12px;
     padding: 8px 16px;
-    border-bottom: 1px solid rgba(232,255,71,0.08);
+    border-bottom: 1px solid rgba(24,119,242,0.08);
   }
   .demo-creds-row:last-child { border-bottom: none; }
   .demo-key {
