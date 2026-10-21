@@ -886,8 +886,8 @@ export default function Portfolio() {
       <nav className={scrolled ? "scrolled" : ""}>
         <a href="#hero" className="nav-logo" onClick={(e) => { e.preventDefault(); scrollTo("hero"); }}>
           <span className="logo-a">A</span>
-          <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{width:28,height:28,flexShrink:0}}>
-            <path d="M0 0 H500 V140 H335 V168 H315 V500 H185 V168 H165 V140 H0 Z" fill="#ff8200" />
+          <svg viewBox="0 0 500 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{width:24,height:27,flexShrink:0}}>
+            <path d="M0 0 H500 V140 H335 V168 H315 V560 H185 V168 H165 V140 H0 Z" fill="#ff8200" />
           </svg>
         </a>
         <div className="nav-links">
@@ -902,8 +902,8 @@ export default function Portfolio() {
       {/* HERO */}
       <section className="hero" id="hero">
         <div className="hero-grid" />
-        <svg className="hero-power-t" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M0 0 H500 V140 H335 V168 H315 V500 H185 V168 H165 V140 H0 Z" fill="var(--accent)" />
+        <svg className="hero-power-t" viewBox="0 0 500 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0 0 H500 V140 H335 V168 H315 V560 H185 V168 H165 V140 H0 Z" fill="var(--accent)" />
         </svg>
         <h1 className="hero-title">
           <div>Alexander</div>
