@@ -1038,22 +1038,21 @@ export default function Portfolio() {
             <p className="section-eyebrow" style={{ marginBottom: 24 }}>Experience</p>
             <ul className="exp-list">
               {[
-                { role: "Freelance Developer & AI Consultant", dates: "2026 – Present" },
-                { role: "Operations Manager", dates: "2024 – 2026" },
-                { role: "Data Analyst / Project Manager", dates: "2022 – 2024" },
-                { role: "Smartsheet Admin & Analyst", dates: "2023 – 2024" },
+                { role: "Data Analyst", yrs: "4+ yrs" },
+                { role: "Project Management", yrs: "4+ yrs" },
+                { role: "Automations", yrs: "3 yrs" },
+                { role: "Business Intelligence", yrs: "2 yrs" },
+                { role: "Developer", yrs: "2 yrs" },
+                { role: "AI Solutions", yrs: "1 yr" },
+                { role: "Consultant", yrs: "1 yr" },
+                { role: "Founder", yrs: "1 yr" },
               ].map((e) => (
                 <li key={e.role} className="exp-item">
                   <span className="exp-role">{e.role}</span>
-                  <span className="exp-dates">{e.dates}</span>
+                  <span className="exp-dates">{e.yrs}</span>
                 </li>
               ))}
             </ul>
-            <div className="exp-tags">
-              {["Founder", "Consultant", "Developer", "AI Solutions", "Project Management", "Data Analyst", "Automations", "Business Intelligence"].map((tag) => (
-                <span key={tag} className="exp-tag">{tag}</span>
-              ))}
-            </div>
           </div>
         </div>
       </section>
