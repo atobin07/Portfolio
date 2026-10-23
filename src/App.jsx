@@ -81,17 +81,30 @@ const styles = `
     backdrop-filter: blur(14px);
   }
   .nav-logo {
-    font-size: 28px; font-weight: 800; letter-spacing: -0.05em;
+    font-family: var(--font-mono);
+    font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
     text-decoration: none;
-    display: flex; align-items: center; gap: 4px;
+    display: flex; align-items: center; gap: 0;
     line-height: 1;
+    padding: 6px 10px;
+    border: 1.5px solid rgba(255,130,0,0.25);
+    border-radius: 6px;
+    background: rgba(255,130,0,0.04);
+    transition: border-color 0.2s, background 0.2s;
   }
-  .nav-logo .logo-a { color: var(--text2); }
+  .nav-logo:hover {
+    border-color: rgba(255,130,0,0.55);
+    background: rgba(255,130,0,0.08);
+  }
+  .nav-logo .logo-bracket { color: var(--accent); opacity: 0.7; font-size: 20px; }
+  .nav-logo .logo-a { color: var(--text); }
   .nav-logo .logo-power-t {
     display: inline-block;
-    width: 26px; height: 34px;
+    width: 22px; height: 28px;
     flex-shrink: 0;
+    margin: 0 1px;
   }
+  .nav-logo .logo-slash { color: var(--accent); opacity: 0.7; font-size: 20px; }
   .nav-links { display: flex; gap: 36px; }
   .nav-links button {
     background: none; border: none; color: var(--text3);
@@ -885,10 +898,12 @@ export default function Portfolio() {
       {/* Nav */}
       <nav className={scrolled ? "scrolled" : ""}>
         <a href="#hero" className="nav-logo" onClick={(e) => { e.preventDefault(); scrollTo("hero"); }}>
+          <span className="logo-bracket">&lt;</span>
           <span className="logo-a">A</span>
-          <svg viewBox="0 0 500 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style={{width:24,height:27,flexShrink:0}}>
+          <svg className="logo-power-t" viewBox="0 0 500 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M0 0 H500 V140 H335 V168 H315 V560 H185 V168 H165 V140 H0 Z" fill="#ff8200" />
           </svg>
+          <span className="logo-slash">/&gt;</span>
         </a>
         <div className="nav-links">
           {["skills", "work", "about"].map((p) => (
