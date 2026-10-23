@@ -427,6 +427,21 @@ const styles = `
     font-size: 12px; font-weight: 500; color: var(--accent);
     white-space: nowrap;
   }
+  .exp-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;
+  }
+  .exp-tag {
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    color: var(--text3);
+    background: transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .exp-tag:hover { border-color: var(--accent); color: var(--accent); }
 
   /* DEMO CREDENTIALS */
   .demo-creds {
@@ -1034,6 +1049,11 @@ export default function Portfolio() {
                 </li>
               ))}
             </ul>
+            <div className="exp-tags">
+              {["Founder", "Consultant", "Developer", "AI Solutions", "Project Management", "Data Analyst", "Automations", "Business Intelligence"].map((tag) => (
+                <span key={tag} className="exp-tag">{tag}</span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
