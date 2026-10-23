@@ -82,13 +82,13 @@ const styles = `
   }
   .nav-logo {
     font-family: var(--font-mono);
-    font-size: 110px; font-weight: 700; letter-spacing: -0.02em;
+    font-size: 34px; font-weight: 700; letter-spacing: -0.02em;
     text-decoration: none;
     display: flex; align-items: center; gap: 0;
     line-height: 1;
-    padding: 18px 28px;
-    border: 3px solid rgba(255,130,0,0.25);
-    border-radius: 16px;
+    padding: 8px 14px;
+    border: 1.5px solid rgba(255,130,0,0.25);
+    border-radius: 8px;
     background: rgba(255,130,0,0.04);
     transition: border-color 0.2s, background 0.2s;
   }
@@ -96,16 +96,16 @@ const styles = `
     border-color: rgba(255,130,0,0.55);
     background: rgba(255,130,0,0.08);
   }
-  .nav-logo .logo-bracket { color: var(--accent); opacity: 0.7; font-size: 100px; }
+  .nav-logo .logo-bracket { color: var(--accent); opacity: 0.7; font-size: 30px; }
   .nav-logo .logo-a { color: var(--text); }
-  .nav-logo .logo-slash-mid { color: var(--accent); opacity: 0.85; font-size: 80px; margin: 0 4px; }
+  .nav-logo .logo-slash-mid { color: var(--accent); opacity: 0.85; font-size: 24px; margin: 0 2px; }
   .nav-logo .logo-power-t {
     display: inline-block;
-    width: 110px; height: 140px;
+    width: 34px; height: 43px;
     flex-shrink: 0;
-    margin: 0 4px;
+    margin: 0 2px;
   }
-  .nav-logo .logo-slash { color: var(--accent); opacity: 0.7; font-size: 100px; }
+  .nav-logo .logo-slash { color: var(--accent); opacity: 0.7; font-size: 30px; }
   .nav-links { display: flex; gap: 36px; }
   .nav-links button {
     background: none; border: none; color: var(--text3);
