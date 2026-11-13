@@ -606,7 +606,7 @@ const PROJECTS = [
   {
     id: 2,
     num: "02",
-    name: "HerEra Spreadsheets",
+    name: "HerSoftEra",
     tagline: "Women's life management platform — budgeting, wellness, goals, and social planning",
     tags: ["Next.js", "TypeScript", "Tailwind", "Supabase", "Stripe"],
     description:
@@ -627,7 +627,7 @@ const PROJECTS = [
       { key: "Email", val: "Kit (ConvertKit)", accent: true },
       { key: "Users", val: "12,000+", live: true },
     ],
-    liveUrl: "https://hereraspreadsheets.com",
+    liveUrl: "https://hersoftera.app",
     githubUrl: null,
     demo: null,
   },
