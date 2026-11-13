@@ -743,7 +743,7 @@ const PROJECTS = [
       { key: "Security", val: "Row-Level Security", live: true },
     ],
     liveUrl: null,
-    githubUrl: "https://github.com/atobin07/idealfitness",
+    githubUrl: null,
     demo: null,
   },
   {
