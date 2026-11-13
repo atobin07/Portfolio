@@ -502,12 +502,72 @@ const styles = `
   @media (max-width: 900px) {
     .skills-group { grid-template-columns: 1fr; gap: 16px; }
   }
+  /* B2B TOOLS */
+  .b2b-section {
+    padding: 120px 52px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .b2b-header { margin-bottom: 64px; }
+  .b2b-category { margin-bottom: 56px; }
+  .b2b-category-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text3);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .b2b-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .b2b-card {
+    display: block;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 24px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+    box-shadow: var(--card-shadow);
+  }
+  .b2b-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .b2b-card-top {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .b2b-glyph {
+    font-size: 20px; color: var(--accent);
+    flex-shrink: 0; width: 28px;
+  }
+  .b2b-card-name {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .b2b-card-desc {
+    font-size: 13px; color: var(--text2); line-height: 1.6;
+  }
+  .b2b-card-cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 11px; font-weight: 600;
+    color: var(--accent); letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
     .hero { padding: 0 24px 64px; }
     .hero-bottom { flex-direction: column; align-items: flex-start; }
     .hero-stats { gap: 32px; }
     .work, .about, .skills-section { padding: 80px 24px; }
+    .b2b-section { padding: 80px 24px; }
     .project-header { grid-template-columns: 36px 1fr auto; gap: 14px; }
     .project-tags { display: none; }
     .project-body-inner { grid-template-columns: 1fr; }
@@ -774,11 +834,25 @@ const STRIPES = ["stripe-grey", "stripe-orange", "stripe-black"];
 
 function ProjectCard({ project, index }) {
   const [open, setOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const cardRef = useRef(null);
   const stripe = STRIPES[index % 3];
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <div
-      className={`project-card fade-in ${stripe} ${open ? "expanded" : ""}`}
+      ref={cardRef}
+      className={`project-card fade-in ${stripe} ${open ? "expanded" : ""} ${visible ? "visible" : ""}`}
       style={{ transitionDelay: `${index * 0.05}s` }}
     >
       <div className="project-header" onClick={() => setOpen(!open)}>
@@ -852,6 +926,52 @@ function ProjectCard({ project, index }) {
   );
 }
 
+const B2B_CATEGORIES = [
+  {
+    label: "Sales & Revenue",
+    tools: [
+      { glyph: "◆", name: "Deal Coach", desc: "Turn messy deal notes into a win probability, the next best moves, and an objection playbook.", path: "/deal-coach" },
+      { glyph: "§", name: "Proposal Generator", desc: "A prospect and their pain points in — a tailored proposal with pricing tiers and ROI out.", path: "/proposal-generator" },
+    ],
+  },
+  {
+    label: "Customer Success",
+    tools: [
+      { glyph: "⚠", name: "Churn Risk Explainer", desc: "Score your book of accounts for churn risk, explain why, and draft a save email for each.", path: "/churn-explainer" },
+      { glyph: "⛑", name: "Support Ticket Triage", desc: "Classify incoming tickets by urgency and sentiment, route them, and draft the reply instantly.", path: "/ticket-triage" },
+    ],
+  },
+  {
+    label: "Operations",
+    tools: [
+      { glyph: "◉", name: "Meeting Intelligence", desc: "Paste a transcript, get decisions, owned action items, sentiment by speaker, and a follow-up email.", path: "/meeting-intelligence" },
+      { glyph: "≣", name: "SOP Generator", desc: "Describe a process, get a polished SOP with roles, numbered steps, edge cases, and metrics.", path: "/sop-generator" },
+    ],
+  },
+  {
+    label: "Marketing",
+    tools: [
+      { glyph: "◎", name: "Competitive Intelligence", desc: "A competitor in — a SWOT from your side, positioning gaps, a battlecard, and the wedge to win.", path: "/competitive-intel" },
+      { glyph: "⇄", name: "Content Repurposer", desc: "One post becomes a LinkedIn post, an X thread, an email, ad copy, and hashtags — each channel-native.", path: "/content-repurposer" },
+    ],
+  },
+  {
+    label: "Finance & Strategy",
+    tools: [
+      { glyph: "Δ", name: "Budget Variance Analyst", desc: "Budget vs. actuals, with each variance explained in plain English an exec can act on.", path: "/budget-variance" },
+      { glyph: "¶", name: "KPI Narrator", desc: "Raw KPIs become the board-ready paragraph a CEO would present — plus highlights, concerns, and asks.", path: "/kpi-narrator" },
+    ],
+  },
+  {
+    label: "Analytics Dashboards",
+    tools: [
+      { glyph: "▦", name: "Sales Pipeline", desc: "Live pipeline — stage funnel, weighted forecast, rep breakdown, and top open deals.", path: "/dashboards/pipeline" },
+      { glyph: "◍", name: "Lead Generation", desc: "Acquisition by channel, the MQL to SQL funnel, conversion trend, and per-channel performance.", path: "/dashboards/leads" },
+      { glyph: "◆", name: "Executive KPIs", desc: "Company health — ARR, MRR growth, retention, revenue by segment, and a goal tracker.", path: "/dashboards/kpi" },
+    ],
+  },
+];
+
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState("work");
@@ -923,7 +1043,7 @@ export default function Portfolio() {
           <span className="logo-slash">/&gt;</span>
         </a>
         <div className="nav-links">
-          {["skills", "work", "about"].map((p) => (
+          {["skills", "work", "about", "b2b"].map((p) => (
             <button key={p} className={activePage === p ? "active" : ""} onClick={() => scrollTo(p)}>
               {p.charAt(0).toUpperCase() + p.slice(1)}
             </button>
@@ -1054,6 +1174,41 @@ export default function Portfolio() {
               ))}
             </ul>
           </div>
+        </div>
+      </section>
+
+      {/* B2B TOOLS */}
+      <section id="b2b" style={{ background: "var(--bg3)" }}>
+        <div className="b2b-section">
+          <div className="b2b-header fade-in">
+            <p className="section-eyebrow">B2B Tools</p>
+            <h2 className="section-big-heading">
+              13 tools.<br /><em>All live. All interactive.</em>
+            </h2>
+          </div>
+          {B2B_CATEGORIES.map((cat, ci) => (
+            <div key={cat.label} className="b2b-category fade-in" style={{ transitionDelay: `${ci * 0.06}s` }}>
+              <div className="b2b-category-label">{cat.label}</div>
+              <div className="b2b-grid">
+                {cat.tools.map((tool) => (
+                  <a
+                    key={tool.name}
+                    className="b2b-card"
+                    href={`https://primelayer.solutions${tool.path}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="b2b-card-top">
+                      <span className="b2b-glyph">{tool.glyph}</span>
+                      <span className="b2b-card-name">{tool.name}</span>
+                    </div>
+                    <p className="b2b-card-desc">{tool.desc}</p>
+                    <span className="b2b-card-cta">Try it live →</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
