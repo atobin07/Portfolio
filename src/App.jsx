@@ -675,6 +675,8 @@ const styles = `
     cursor: none; transition: opacity 0.2s;
   }
   .tool-btn-primary:hover { opacity: 0.88; }
+  .tool-spinner { width: 36px; height: 36px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #a78bfa; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); }}
   .tool-btn-secondary {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--bg3); color: var(--text2);
@@ -1490,12 +1492,43 @@ const TOOL_SAMPLES = {
 
 function ToolModal({ tool, onClose }) {
   const [view, setView] = useState("form");
-  const data = TOOL_SAMPLES[tool.name];
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
+  const formRef = React.useRef(null);
 
-  const handleRun = (e) => { e.preventDefault(); setView("result"); };
+  const collectFields = () => {
+    if (!formRef.current) return {};
+    const fields = {};
+    formRef.current.querySelectorAll("input, textarea, select").forEach((el) => {
+      const label = el.closest(".tool-field")?.querySelector(".tool-label")?.textContent;
+      if (label && el.value) fields[label] = el.value;
+    });
+    return fields;
+  };
+
+  const handleRun = async (e) => {
+    e.preventDefault();
+    setView("loading");
+    setError(null);
+    try {
+      const res = await fetch("/api/tool", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tool: tool.name, fields: collectFields() }),
+      });
+      if (!res.ok) throw new Error(`API error ${res.status}`);
+      const data = await res.json();
+      setResult(data);
+      setView("result");
+    } catch (err) {
+      setError(err.message);
+      setView("form");
+    }
+  };
 
   const renderResult = () => {
-    if (!data) return <p className="result-text">Sample output coming soon.</p>;
+    const data = result;
+    if (!data) return <p className="result-text">No result yet.</p>;
 
     if (tool.name === "Deal Coach") {
       const pct = data.win_probability;
@@ -1917,9 +1950,15 @@ function ToolModal({ tool, onClose }) {
           <button className="tool-modal-close" onClick={onClose}>✕</button>
         </div>
         <div className="tool-modal-body">
-          {view === "form" ? (
-            <form onSubmit={handleRun} className="tool-form">
+          {view === "loading" ? (
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "60px 0", gap: 16 }}>
+              <div className="tool-spinner" />
+              <p style={{ opacity: 0.5, fontSize: "0.85rem" }}>Running AI analysis…</p>
+            </div>
+          ) : view === "form" ? (
+            <form ref={formRef} onSubmit={handleRun} className="tool-form">
               <p className="result-text" style={{ marginBottom: 16 }}>{tool.desc}</p>
+              {error && <p style={{ color: "#f87171", fontSize: "0.82rem", marginBottom: 12 }}>Error: {error}</p>}
               {renderForm()}
               <div className="tool-actions">
                 <button type="submit" className="tool-btn-primary">Run →</button>
