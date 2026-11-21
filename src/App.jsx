@@ -802,6 +802,35 @@ const PROJECTS = [
     demo: null,
   },
   {
+    id: 8,
+    num: "08",
+    name: "AdvisoryCloud 3.0",
+    tagline: "Full platform rebuild of advisorycloud.com — Digital Boardroom, AI-powered board opportunities, and full Recurly billing",
+    tags: ["React + Vite", "Supabase", "Claude AI", "Recurly", "Next.js"],
+    description:
+      "Complete ground-up rebuild of advisorycloud.com: a Digital Boardroom SaaS connecting executives with corporate advisory boards. 687 commits, ~50 database migrations, 24 serverless API endpoints, 15 Supabase edge functions, and 75+ product screens — including a Board Opportunities Engine that runs a weekly Federal Register pipeline through Claude AI to generate tiered board listings.",
+    highlights: [
+      "Built the full Digital Boardroom: board creation, member lifecycle management, 1:1 and group messaging, advisor directory, match scoring, and an AI assistant",
+      "Board Opportunities Engine: weekly pipeline ingests Federal Register postings, feeds them through Claude AI to write listings, and gates access by membership tier",
+      "Full Recurly billing integration — hosted checkout, webhooks, plan sync, Apple Pay, and self-serve cancel flow",
+      "SEO-optimized public advisor directory: ~2,366 statically generated pages via Next.js 16 with Cloudflare Worker routing",
+      "PWA with Capacitor for native iOS/Android packaging; PostHog analytics and Resend transactional email wired throughout",
+      "Supabase backend with Row-Level Security, auth hardening, XSS/CORS lockdown, and webhook signature verification",
+      "GitHub Actions CI/CD with ~50 Postgres migrations; legacy member migration and onboarding re-engagement campaigns",
+    ],
+    meta: [
+      { key: "Type", val: "SaaS Platform Rebuild" },
+      { key: "Stack", val: "React + Vite + Supabase" },
+      { key: "AI", val: "Claude API", accent: true },
+      { key: "Billing", val: "Recurly" },
+      { key: "Commits", val: "687", live: true },
+      { key: "Screens", val: "75+" },
+    ],
+    liveUrl: "https://advisorycloud.com",
+    githubUrl: null,
+    demo: null,
+  },
+  {
     id: 7,
     num: "07",
     name: "Cedar & Salt",
@@ -1074,7 +1103,7 @@ export default function Portfolio() {
               <div className="stat-label">Years delivering</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num">7</div>
+              <div className="stat-num">8</div>
               <div className="stat-label">Apps in production</div>
             </div>
             <div className="stat-item">
