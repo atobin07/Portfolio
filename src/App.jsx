@@ -910,17 +910,22 @@ function ProjectCard({ project, index }) {
                 <li key={i}>{h}</li>
               ))}
             </ul>
+            <div className="project-links">
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary">
+                  View Live ↗
+                </a>
+              )}
+              {project.githubUrl && (
+                <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary">
+                  GitHub →
+                </a>
+              )}
+            </div>
             {project.liveUrl && (
               <div className="project-embed">
                 <iframe src={project.liveUrl} title={project.name} loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms" />
                 <div className="project-embed-label">{project.liveUrl.replace(/^https?:\/\//, "")}</div>
-              </div>
-            )}
-            {project.githubUrl && (
-              <div className="project-links">
-                <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary">
-                  GitHub →
-                </a>
               </div>
             )}
             {project.demo && (
