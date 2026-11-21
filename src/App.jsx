@@ -335,6 +335,9 @@ const styles = `
     content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600;
   }
   .project-links { margin-top: 28px; display: flex; gap: 12px; }
+  .project-embed { margin-top: 28px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; position: relative; }
+  .project-embed iframe { display: block; width: 100%; height: 480px; border: none; }
+  .project-embed-label { font-size: 11px; color: var(--text-muted); padding: 8px 12px; border-top: 1px solid var(--border); letter-spacing: 0.05em; text-transform: uppercase; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--accent); color: #fff;
@@ -907,18 +910,19 @@ function ProjectCard({ project, index }) {
                 <li key={i}>{h}</li>
               ))}
             </ul>
-            <div className="project-links">
-              {project.liveUrl && (
-                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary">
-                  View Live ↗
-                </a>
-              )}
-              {project.githubUrl && (
+            {project.liveUrl && (
+              <div className="project-embed">
+                <iframe src={project.liveUrl} title={project.name} loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms" />
+                <div className="project-embed-label">{project.liveUrl.replace(/^https?:\/\//, "")}</div>
+              </div>
+            )}
+            {project.githubUrl && (
+              <div className="project-links">
                 <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary">
                   GitHub →
                 </a>
-              )}
-            </div>
+              </div>
+            )}
             {project.demo && (
               <div className="demo-creds">
                 <div className="demo-creds-label">
