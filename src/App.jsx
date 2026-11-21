@@ -511,58 +511,90 @@ const styles = `
     max-width: 1200px;
     margin: 0 auto;
   }
-  .b2b-header { margin-bottom: 64px; }
-  .b2b-category { margin-bottom: 56px; }
+  .b2b-header { margin-bottom: 72px; }
+  .b2b-category { margin-bottom: 64px; }
   .b2b-category-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--text3);
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .b2b-category-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border2), transparent);
   }
   .b2b-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
   }
   .b2b-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px 24px 20px;
+    padding: 28px 28px 24px;
     text-decoration: none;
     color: inherit;
-    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    text-align: left;
+    border: none;
+    transition: background 0.18s;
+    position: relative;
+    overflow: hidden;
   }
-  .b2b-card:hover {
-    box-shadow: var(--card-shadow-hover);
-    border-color: var(--accent);
-    transform: translateY(-2px);
+  .b2b-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,130,0,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s;
   }
+  .b2b-card:hover { background: var(--bg3); }
+  .b2b-card:hover::before { opacity: 1; }
   .b2b-card-top {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 10px;
+    display: flex; align-items: flex-start; gap: 14px;
+    margin-bottom: 12px;
   }
-  .b2b-glyph {
-    font-size: 20px; color: var(--accent);
-    flex-shrink: 0; width: 28px;
+  .b2b-glyph-wrap {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(255,130,0,0.1);
+    border: 1px solid rgba(255,130,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 17px;
+    color: var(--accent);
+    transition: background 0.18s, border-color 0.18s;
+  }
+  .b2b-card:hover .b2b-glyph-wrap {
+    background: rgba(255,130,0,0.18);
+    border-color: rgba(255,130,0,0.4);
   }
   .b2b-card-name {
     font-size: 15px; font-weight: 700; color: var(--text);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em; padding-top: 6px;
   }
   .b2b-card-desc {
-    font-size: 13px; color: var(--text2); line-height: 1.6;
+    font-size: 13px; color: var(--text3); line-height: 1.65;
+    flex: 1;
   }
   .b2b-card-cta {
-    display: inline-block;
-    margin-top: 14px;
-    font-size: 11px; font-weight: 600;
-    color: var(--accent); letter-spacing: 0.04em;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 20px;
+    font-size: 11px; font-weight: 700;
+    color: var(--accent); letter-spacing: 0.06em;
     text-transform: uppercase;
+    opacity: 0.75;
+    transition: opacity 0.15s, gap 0.15s;
   }
+  .b2b-card:hover .b2b-card-cta { opacity: 1; gap: 10px; }
 
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
@@ -2200,10 +2232,9 @@ export default function Portfolio() {
                     key={tool.name}
                     className="b2b-card"
                     onClick={() => setActiveTool(tool)}
-                    style={{ cursor: "pointer", textAlign: "left", background: "none", border: "none", padding: 0, width: "100%" }}
                   >
                     <div className="b2b-card-top">
-                      <span className="b2b-glyph">{tool.glyph}</span>
+                      <span className="b2b-glyph-wrap">{tool.glyph}</span>
                       <span className="b2b-card-name">{tool.name}</span>
                     </div>
                     <p className="b2b-card-desc">{tool.desc}</p>
