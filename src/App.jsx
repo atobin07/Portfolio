@@ -579,7 +579,311 @@ const styles = `
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
   }
+
+  /* ─── TOOL MODAL ─── */
+  .tool-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(10,10,10,0.72);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    animation: fadeOverlay 0.2s ease;
+  }
+  @keyframes fadeOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .tool-modal {
+    background: var(--bg2);
+    border-radius: 20px;
+    width: 100%; max-width: 860px;
+    max-height: 88vh;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,130,0,0.2);
+    animation: slideModal 0.25s cubic-bezier(0.16,1,0.3,1);
+  }
+  @keyframes slideModal {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .tool-modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .tool-modal-title-block { display: flex; align-items: center; gap: 14px; }
+  .tool-modal-glyph {
+    font-size: 22px; color: var(--accent);
+    width: 44px; height: 44px;
+    background: rgba(255,130,0,0.1);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tool-modal-name {
+    font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: var(--text);
+  }
+  .tool-modal-category {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text3);
+    margin-top: 2px;
+  }
+  .tool-modal-close {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg3); border: none;
+    font-size: 18px; color: var(--text3);
+    display: flex; align-items: center; justify-content: center;
+    cursor: none; transition: background 0.2s, color 0.2s;
+  }
+  .tool-modal-close:hover { background: var(--border2); color: var(--text); }
+  .tool-modal-body {
+    overflow-y: auto; flex: 1;
+    padding: 28px;
+  }
+  /* Form styles */
+  .tool-form { display: flex; flex-direction: column; gap: 16px; }
+  .tool-field { display: flex; flex-direction: column; gap: 6px; }
+  .tool-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--text3);
+  }
+  .tool-input, .tool-textarea, .tool-select {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: var(--font-display); font-size: 14px; color: var(--text);
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    cursor: none;
+  }
+  .tool-input:focus, .tool-textarea:focus, .tool-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,130,0,0.12);
+  }
+  .tool-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .tool-select { appearance: none; }
+  .tool-actions {
+    display: flex; gap: 10px; margin-top: 4px;
+  }
+  .tool-btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    font-family: var(--font-display); font-size: 13px; font-weight: 600;
+    padding: 11px 22px; border-radius: 100px; border: none;
+    cursor: none; transition: opacity 0.2s;
+  }
+  .tool-btn-primary:hover { opacity: 0.88; }
+  .tool-btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg3); color: var(--text2);
+    font-family: var(--font-display); font-size: 13px; font-weight: 500;
+    padding: 11px 22px; border-radius: 100px; border: none;
+    cursor: none; transition: background 0.2s;
+  }
+  .tool-btn-secondary:hover { background: var(--border2); }
+  /* Result pane */
+  .tool-result { animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .result-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--text3); background: none; border: none; cursor: none;
+    margin-bottom: 24px; padding: 0; transition: color 0.2s;
+  }
+  .result-back:hover { color: var(--accent); }
+  .result-section { margin-bottom: 28px; }
+  .result-section-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  .result-card {
+    background: var(--bg3); border-radius: 12px; padding: 16px 20px;
+    border: 1px solid var(--border);
+  }
+  .result-text {
+    font-size: 14px; line-height: 1.7; color: var(--text2);
+  }
+  .result-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row-key { color: var(--text3); font-weight: 500; }
+  .result-row-val { color: var(--text); font-weight: 600; text-align: right; max-width: 60%; }
+  .result-pill {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
+  }
+  .result-pill.green { background: rgba(34,197,94,0.15); color: #16a34a; }
+  .result-pill.amber { background: rgba(245,158,11,0.15); color: #d97706; }
+  .result-pill.red { background: rgba(239,68,68,0.15); color: #dc2626; }
+  .result-pill.blue { background: rgba(59,130,246,0.15); color: #2563eb; }
+  .result-pill.orange { background: rgba(255,130,0,0.15); color: var(--accent); }
+  .result-list { list-style: none; }
+  .result-list li {
+    font-size: 13px; line-height: 1.65; color: var(--text2);
+    padding: 7px 0; border-bottom: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .result-list li:last-child { border-bottom: none; }
+  .result-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+  .result-signal {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text2);
+  }
+  .result-signal:last-child { border-bottom: none; }
+  .signal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .signal-dot.pos { background: #22c55e; }
+  .signal-dot.risk { background: #f59e0b; }
+  /* Win probability gauge */
+  .gauge-wrap { display: flex; flex-direction: column; align-items: center; padding: 8px 0 4px; }
+  .gauge-pct {
+    font-size: 52px; font-weight: 800; letter-spacing: -0.04em; color: var(--text); line-height: 1;
+  }
+  .gauge-label { font-size: 11px; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+  /* Priority tags */
+  .priority-high { color: #dc2626; }
+  .priority-medium { color: #d97706; }
+  .priority-low { color: #16a34a; }
+  .action-card {
+    background: var(--bg3); border-radius: 10px; padding: 14px 16px;
+    border-left: 3px solid var(--border2); margin-bottom: 10px;
+    border: 1px solid var(--border);
+  }
+  .action-card.high { border-left-color: #dc2626; }
+  .action-card.medium { border-left-color: #d97706; }
+  .action-card.low { border-left-color: #22c55e; }
+  .action-card-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .action-card-rationale { font-size: 12px; color: var(--text3); line-height: 1.5; }
+  /* Pricing tiers */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .pricing-tier {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+    position: relative;
+  }
+  .pricing-tier.recommended { border-color: var(--accent); }
+  .pricing-rec-badge {
+    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .tier-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .tier-price { font-size: 22px; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; }
+  .tier-cadence { font-size: 11px; color: var(--text3); }
+  .tier-best-for { font-size: 11px; color: var(--text2); margin: 8px 0; font-style: italic; }
+  .tier-features { list-style: none; }
+  .tier-features li { font-size: 12px; color: var(--text2); padding: 3px 0; display: flex; gap: 6px; }
+  .tier-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+  /* Objections accordion */
+  .objection-item {
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 8px;
+  }
+  .objection-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--text);
+    cursor: none; background: var(--bg3);
+  }
+  .objection-a {
+    padding: 12px 16px; font-size: 13px; color: var(--text2); line-height: 1.6;
+    border-top: 1px solid var(--border); background: var(--bg2);
+  }
+  /* Timeline */
+  .timeline-item {
+    display: flex; gap: 16px; padding-bottom: 20px;
+    position: relative;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute; left: 15px; top: 28px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item:last-child::before { display: none; }
+  .timeline-dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,130,0,0.12); border: 2px solid var(--accent);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--accent);
+  }
+  .timeline-content { padding-top: 4px; }
+  .timeline-phase { font-size: 13px; font-weight: 700; color: var(--text); }
+  .timeline-duration { font-size: 11px; color: var(--accent); font-weight: 600; margin: 2px 0; }
+  .timeline-detail { font-size: 12px; color: var(--text3); line-height: 1.5; }
+  /* ROI block */
+  .roi-headline {
+    font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  /* Ticket triage */
+  .ticket-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+    margin-bottom: 10px;
+  }
+  .ticket-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+  .ticket-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .ticket-draft {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px; font-size: 12px; color: var(--text2); line-height: 1.6;
+    margin-top: 10px; white-space: pre-wrap;
+  }
+  /* Speaker cards */
+  .speaker-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px;
+    margin-bottom: 8px;
+  }
+  .speaker-name { font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: 0.04em; text-transform: uppercase; }
+  .speaker-sentiment { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  /* Content cards */
+  .content-channel-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .content-channel-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .content-body { font-size: 13px; color: var(--text2); line-height: 1.65; }
+  /* Budget variance */
+  .variance-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .variance-table th {
+    text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text3); padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .variance-table td { padding: 10px 10px; border-bottom: 1px solid var(--border); color: var(--text2); }
+  .variance-table tr:last-child td { border-bottom: none; }
+  .over { color: #dc2626; font-weight: 600; }
+  .under { color: #16a34a; font-weight: 600; }
+  /* SOP steps */
+  .sop-step {
+    display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .sop-step:last-child { border-bottom: none; }
+  .sop-step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .sop-step-content { flex: 1; }
+  .sop-step-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .sop-step-detail { font-size: 12px; color: var(--text3); line-height: 1.5; margin-top: 3px; }
+  /* SWOT grid */
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .swot-cell {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 14px;
+  }
+  .swot-cell-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .swot-cell ul { list-style: none; }
+  .swot-cell ul li { font-size: 12px; color: var(--text2); padding: 3px 0; display: flex; gap: 6px; }
+  .swot-cell ul li::before { content: '•'; color: var(--accent); }
 `;
+
 
 const SKILL_GROUPS = [
   {
@@ -1010,9 +1314,633 @@ const B2B_CATEGORIES = [
   },
 ];
 
+const TOOL_SAMPLES = {
+  "Deal Coach": {
+    summary: "Opportunity is active but stalled at the proposal stage. Champion has executive access, which is positive, but the lack of formal evaluation criteria and a silent economic buyer are significant risks. Prioritize getting written requirements and an executive sponsor meeting.",
+    win_probability: 58,
+    confidence: "medium",
+    stage: "Proposal",
+    health: "watch",
+    signals: [
+      { type: "positive", text: "Champion confirmed with executive access" },
+      { type: "positive", text: "Competitor mentioned — buyer is actively evaluating" },
+      { type: "risk", text: "No formal evaluation criteria shared" },
+      { type: "risk", text: "Economic buyer has gone silent for 2 weeks" },
+      { type: "neutral", text: "Legal review not yet initiated" },
+    ],
+    next_actions: [
+      { action: "Schedule executive sponsor meeting within 5 days", rationale: "Silent economic buyer is the top stall risk; a direct touchpoint reactivates the deal.", priority: "high" },
+      { action: "Send a written RFP / evaluation-criteria template", rationale: "No formal criteria means no way to win on paper — get the scorecard so you can fill it.", priority: "high" },
+      { action: "Deliver a ROI summary tied to their Q3 cost-reduction goal", rationale: "Champion needs ammunition to sell internally; finance-framed ROI lands.", priority: "medium" },
+    ],
+    objections: [
+      { objection: "We already have a solution that does most of this.", response: "Most solutions handle the core workflow. What they miss is the AI layer that cuts manual prep from 4 hours to 20 minutes — which is where your team's time is actually going. Can I show you the side-by-side?" },
+      { objection: "The price is higher than what we budgeted.", response: "The budget was likely set before you scoped what manual effort costs. If we quantify just the analyst hours saved, the payback is typically under 90 days. Want me to run the numbers for your environment?" },
+    ],
+  },
+  "Proposal Generator": {
+    title: "Transforming Data Operations at Meridian Health Partners",
+    prepared_for: "Meridian Health Partners — VP of Operations",
+    executive_summary: "Meridian's operations team spends an estimated 1,200 analyst-hours per quarter on manual reporting that could be automated. This proposal outlines how a structured data platform rollout — phased over 90 days — reduces that burden by 70%, unlocks real-time visibility across all 14 facilities, and positions Meridian for the HL7 FHIR compliance deadline.",
+    situation: "Current state: Excel-based reporting, no single source of truth, 3-day lag on operational KPIs, and a compliance deadline 6 months out that requires audit-ready data trails.",
+    objectives: ["Eliminate manual reporting lag — weekly KPIs available same-day", "FHIR-compliant audit log across all facility data flows", "Self-serve dashboards for department heads with no IT dependency"],
+    solution: [
+      { name: "Data Platform Setup", description: "Supabase + dbt pipeline replacing the Excel reporting chain. Automated nightly refresh; historical data migrated." },
+      { name: "Dashboard Layer", description: "Role-based Airtable interfaces for department heads; executive summary in Vercel-hosted Next.js app." },
+      { name: "Compliance Module", description: "Audit log schema, row-level access controls, and FHIR export endpoint." },
+    ],
+    pricing_tiers: [
+      { name: "Starter", price: "$4,800", cadence: "one-time", best_for: "1–2 departments, proof of concept", features: ["Core pipeline build", "2 Airtable interfaces", "30-day support"], recommended: false },
+      { name: "Professional", price: "$11,500", cadence: "one-time", best_for: "Full facility rollout", features: ["Full pipeline + all dashboards", "FHIR compliance module", "Staff training (4 hrs)", "90-day support"], recommended: true },
+      { name: "Enterprise", price: "$2,200", cadence: "per month", best_for: "Ongoing managed service", features: ["Everything in Professional", "Monthly iteration sprints", "Priority support SLA", "Quarterly business review"], recommended: false },
+    ],
+    roi: { headline: "Payback in under 60 days", annual_value: "$214,000", payback_period: "52 days", assumptions: ["Analyst hours saved: 1,200 / quarter × $45/hr", "Compliance penalty avoidance: estimated $80K risk", "Executive decision speed: 2 decisions/month unblocked"] },
+    timeline: [
+      { phase: "Discovery & Schema", duration: "Week 1–2", detail: "Audit existing data sources, define target schema, stakeholder interviews" },
+      { phase: "Pipeline Build", duration: "Week 3–5", detail: "dbt models, Supabase setup, historical data migration" },
+      { phase: "Dashboard Rollout", duration: "Week 6–8", detail: "Airtable interfaces per department, executive dashboard, UAT" },
+      { phase: "Compliance & Training", duration: "Week 9–12", detail: "FHIR module, access controls, staff training, go-live" },
+    ],
+    differentiators: ["Built by a practitioner who has run this stack at 3 organizations — no learning curve", "Modular design: replace any layer later without rebuilding", "Fixed-fee — no scope creep surprises"],
+    next_steps: ["Approve scope and sign engagement letter", "Provide read access to current data exports for discovery", "Confirm kickoff date — earliest availability: Dec 2"],
+  },
+  "Churn Risk Explainer": {
+    accounts: [
+      { name: "Brightline Logistics", score: 87, tier: "Enterprise", risk: "high", signals: ["No logins in 23 days", "Support ticket unresolved 11 days", "Champion left company"], save_email: "Hi Marcus,\n\nI noticed you haven't had a chance to log in recently and wanted to reach out personally. With the transition on your team, I want to make sure nothing falls through the cracks — especially with your Q4 reporting cycle coming up.\n\nCould we set up 20 minutes this week? I'll bring a quick health check and a roadmap of the new automation features your team was excited about.\n\n— Alex" },
+      { name: "Oakwood Financial", score: 64, tier: "Mid-Market", risk: "medium", signals: ["Usage down 40% vs 90-day avg", "Downgraded seat count last month", "NPS score dropped to 6"], save_email: "Hi Jennifer,\n\nQuick note — I saw your team scaled back a few seats last month and wanted to check in. Sometimes that signals a workflow change; sometimes it means we're not solving the right problems.\n\nEither way, I'd love 15 minutes to hear what's working and what isn't. No agenda other than making sure you're getting value.\n\n— Alex" },
+      { name: "Cascade Media", score: 31, tier: "SMB", risk: "low", signals: ["Logged in 3x this week", "Opened 4 feature emails", "Referred a colleague"], save_email: "Hi Dana,\n\nThanks for the referral to Sarah at Ridgeline — that means a lot and tells me things are going well. As a thank-you, I'd like to get you early access to our new content calendar integration before it goes GA.\n\nI'll send the invite today — let me know if you have questions!\n\n— Alex" },
+    ],
+  },
+  "Support Ticket Triage": {
+    tickets: [
+      { id: "TKT-4421", urgency: "critical", sentiment: "frustrated", category: "Data Loss", route: "Tier 2 Engineering", customer: "Brightline Logistics", subject: "All dashboard data disappeared after update", draft: "Hi Marcus,\n\nThank you for flagging this immediately — I completely understand the urgency and I'm escalating this to our engineering team right now.\n\nI can confirm this is a known issue affecting a small number of accounts after last night's deployment. Our team has identified the root cause and is actively restoring data. You should see everything back within the next 2–4 hours.\n\nI'll personally follow up once your data is fully restored and walk you through what happened. You have my direct line if anything changes in the meantime.\n\nSincerely, Support Team" },
+      { id: "TKT-4418", urgency: "high", sentiment: "confused", category: "Billing", route: "Billing Team", customer: "Oakwood Financial", subject: "Charged twice for the same invoice", draft: "Hi Jennifer,\n\nThank you for bringing this to our attention. I've reviewed your account and can confirm a duplicate charge was processed on Nov 15.\n\nI've initiated a full refund for the duplicate amount — you should see it back on your statement within 3–5 business days depending on your bank.\n\nI apologize for the confusion this caused. We've added a flag to your account to ensure it doesn't recur.\n\nBest, Billing Team" },
+      { id: "TKT-4415", urgency: "low", sentiment: "neutral", category: "How-To", route: "Knowledge Base", customer: "Cascade Media", subject: "How do I export to CSV?", draft: "Hi Dana,\n\nGreat question! Exporting to CSV is straightforward:\n\n1. Open any table or view\n2. Click the ··· menu in the top-right corner\n3. Select Export → Download as CSV\n\nYou can also schedule automated exports under Settings → Integrations → Export Schedule.\n\nLet me know if you'd like a quick walkthrough — happy to jump on a 5-minute call!\n\nBest, Support Team" },
+    ],
+  },
+  "Meeting Intelligence": {
+    meeting_title: "Q4 Strategy Review — Nov 18, 2026",
+    duration: "47 minutes",
+    decisions: [
+      "Approved $120K budget reallocation from print to digital channels for Q4",
+      "Deferred the new CRM migration to Q1 2027 pending security review completion",
+      "Greenlit the pilot of the AI reporting dashboard for the finance team",
+    ],
+    action_items: [
+      { owner: "Sarah Chen", action: "Send revised budget breakdown to CFO by EOD Friday", due: "Nov 22" },
+      { owner: "Marcus Webb", action: "Schedule security review kick-off with IT", due: "Nov 25" },
+      { owner: "Alex Tobin", action: "Spin up dashboard pilot environment and invite finance team", due: "Nov 29" },
+      { owner: "Jennifer Park", action: "Draft Q4 campaign brief using new digital allocation", due: "Dec 1" },
+    ],
+    speakers: [
+      { name: "Sarah Chen", sentiment: "positive", key_point: "Strongly advocated for digital reallocation citing 3.2x ROAS on Q3 test campaigns" },
+      { name: "Marcus Webb", sentiment: "cautious", key_point: "Raised security concerns about CRM migration timeline; requested additional review time" },
+      { name: "Alex Tobin", sentiment: "positive", key_point: "Presented dashboard demo, fielded questions, committed to pilot timeline" },
+    ],
+    follow_up_email: "Subject: Q4 Strategy Review — Decisions & Next Steps\n\nTeam,\n\nThanks for a productive session. Here's what we aligned on:\n\n✅ DECISIONS\n• $120K reallocated from print to digital for Q4\n• CRM migration moved to Q1 2027 (security review pending)\n• AI dashboard pilot approved for finance team\n\n📋 ACTION ITEMS\n• Sarah → CFO budget breakdown by Nov 22\n• Marcus → IT security kick-off by Nov 25\n• Alex → Dashboard pilot live by Nov 29\n• Jennifer → Q4 campaign brief by Dec 1\n\nFull recording available on request. Reply with any corrections.\n\n— Alex",
+  },
+  "SOP Generator": {
+    title: "SOP: Monthly Financial Close Process",
+    version: "v1.0",
+    owner: "Finance Team",
+    frequency: "Monthly — first 3 business days",
+    purpose: "Ensure accurate, timely financial reporting by standardizing the month-end close sequence across all departments.",
+    steps: [
+      { num: 1, title: "Freeze Transactions", detail: "By 5 PM on the last business day of the month, notify all department heads to submit final expense reports and purchase orders. Lock the ERP system for new entries.", role: "Controller", duration: "30 min" },
+      { num: 2, title: "Reconcile Bank Statements", detail: "Download statements from all 3 bank accounts. Match each transaction to the GL. Flag unmatched items in the reconciliation sheet (Tab: 'Exceptions') for review.", role: "Staff Accountant", duration: "2 hrs" },
+      { num: 3, title: "Review AR Aging", detail: "Pull AR aging report. Escalate any balance 60+ days overdue to the CFO. Send automated dunning notice to 30+ day accounts via the billing system.", role: "AR Specialist", duration: "1 hr" },
+      { num: 4, title: "Post Accruals and Adjusting Entries", detail: "Record all accruals per the accrual schedule in the shared drive. Post depreciation entries. Have Controller review and approve all entries before posting.", role: "Controller / Staff Accountant", duration: "1.5 hrs" },
+      { num: 5, title: "Run Trial Balance and P&L Draft", detail: "Generate trial balance from ERP. Confirm it ties to zero. Produce draft P&L and Balance Sheet. Distribute to CFO and VP Finance for preliminary review.", role: "Controller", duration: "45 min" },
+    ],
+    edge_cases: [
+      "If the ERP is down on close day, complete offline in the reconciliation spreadsheet and import when restored — do not delay the close.",
+      "If a department misses the submission deadline, close without their entries and post a correcting journal in month+1.",
+      "If a bank discrepancy exceeds $500, escalate to CFO before proceeding.",
+    ],
+    metrics: ["Close cycle time: target ≤ 3 business days", "Journal entry error rate: target < 1%", "On-time delivery to CFO: 100%"],
+  },
+  "Competitive Intelligence": {
+    competitor: "Salesforce (Sales Cloud)",
+    your_product: "Your CRM Platform",
+    swot: {
+      strengths: ["20–40% lower TCO for mid-market accounts", "Implementation in days, not months", "Native AI features included, no add-on pricing", "Dedicated CSM for all tiers"],
+      weaknesses: ["Smaller ecosystem of third-party integrations", "Less brand recognition in enterprise deals", "No on-premise deployment option"],
+      opportunities: ["Salesforce price increases driving mid-market re-evaluation", "New AI mandates create budget for modern tooling", "Rising demand for fast time-to-value in SMB segment"],
+      threats: ["Salesforce investing $1B in AI features (Einstein GPT)", "Microsoft Dynamics bundling with M365 discounts", "Race-to-bottom pricing from newer entrants"],
+    },
+    positioning_gaps: [
+      "Salesforce's onboarding takes 3–6 months average; your platform is live in 1–2 weeks — lead with this in every discovery call.",
+      "Their AI features require a $75/user/month Einstein add-on; yours are native — quantify this in every pricing conversation.",
+      "They lack a mid-market CSM model; dedicated support is a differentiator in accounts under $100K ACV.",
+    ],
+    battlecard: {
+      win_themes: ["Speed to value", "Total cost of ownership", "AI without the add-on tax"],
+      trap_questions: ["How long did your last CRM implementation take?", "What's your current Einstein / AI add-on spend?", "How often do you actually talk to your CSM?"],
+      landmines: ["Avoid comparing feature lists — Salesforce wins on breadth. Win on outcomes and speed.", "Never call them 'legacy' — buyers have invested years in it."],
+    },
+    wedge: "Target accounts 18–24 months into a Salesforce contract — they've felt the gap between promise and reality and are starting to feel the renewal coming. Lead with a 30-minute live demo showing go-live in a single day.",
+  },
+  "Content Repurposer": {
+    source: "New research: AI-assisted teams ship 3x faster than those who don't — but only if the human stays in the decision seat. The model is the engine. You are the driver.",
+    channels: [
+      { channel: "LinkedIn Post", body: "New data just landed and it's clarifying, not scary:\n\nAI-assisted teams ship 3x faster.\nBut only when a human stays in the decision seat.\n\nThe model is the engine. You are the driver.\n\nThe teams falling behind aren't the ones using AI.\nThey're the ones using it without a system.\n\nWhat's your process for staying in control of AI output?" },
+      { channel: "X / Twitter Thread", body: "1/ New research: AI teams ship 3x faster — but only if the human stays in the decision seat.\n\nThread on what that actually means 👇\n\n2/ The mistake: treating AI like autopilot.\n\nYou set the destination. You override when the terrain changes. The model doesn't know what it doesn't know.\n\n3/ The fix: a 3-step review loop.\n→ AI drafts\n→ Human edits for accuracy + judgment\n→ AI polishes the final version\n\nSpeed AND quality.\n\n4/ The teams winning with AI aren't the fastest prompters. They're the best editors.\n\nAre you building that skill? 🔁 Repost if this reframed it for you." },
+      { channel: "Email Newsletter", body: "Subject: The 3x faster secret (it's not what you think)\n\nHey,\n\nNew research confirmed what a lot of us have felt: AI-assisted teams ship 3x faster.\n\nBut there's a catch — it only holds if a human stays in the decision seat.\n\nI've seen both patterns in the wild. Teams that hand the wheel over entirely get fast output and mediocre judgment. Teams that treat AI as a collaborator and themselves as the final editor? They're the ones actually winning.\n\nThe model is the engine. You're the driver.\n\nOne thing I'd try this week: pick one workflow and run the AI-draft → human-edit → AI-polish loop once. See how it feels.\n\nTalk soon,\nAlex" },
+      { channel: "Ad Copy", body: "Ship 3x faster without losing control.\n\nAI does the drafting. You do the deciding.\n[See how →]" },
+    ],
+    hashtags: ["#AIProductivity", "#FutureOfWork", "#ContentStrategy", "#AITools", "#WorkSmart"],
+  },
+  "Budget Variance Analyst": {
+    period: "Q3 2026",
+    variances: [
+      { category: "Sales & Marketing", budget: 180000, actual: 214000, variance: 34000, type: "over", explanation: "Conference sponsorship ($18K) and two unplanned Google Ads tests ($11K) drove the overage. Pipeline ROI from the conference justifies the spend — recommend moving $20K from Q4 trade shows." },
+      { category: "Engineering", budget: 320000, actual: 298000, variance: -22000, type: "under", explanation: "Two open headcount positions unfilled for the full quarter. Annualized this is a $88K favorable variance — recommend using $40K for contractor backfill on the Q4 feature sprint." },
+      { category: "G&A", budget: 95000, actual: 97200, variance: 2200, type: "over", explanation: "Legal fees for the new vendor contract review. One-time item, no structural concern." },
+      { category: "COGS", budget: 410000, actual: 388000, variance: -22000, type: "under", explanation: "Hosting costs under budget due to Q2 infrastructure optimization now fully realized. Sustainable going forward." },
+    ],
+    summary: "Q3 net variance is $7,800 favorable overall. The marketing overage is offset by engineering underspend driven by open headcount. No structural issues — recommend a mid-Q4 reforecast to reallocate the engineering savings before year-end.",
+    exec_ask: "Approve reallocation of $40K from open engineering headcount to contractor sprint budget (Q4 feature delivery). No net change to total Q3/Q4 envelope.",
+  },
+  "KPI Narrator": {
+    period: "November 2026",
+    narrative: "November was a strong execution month with ARR growth accelerating to 8.2% MoM — the highest rate since February. Net Revenue Retention held at 112%, signaling healthy expansion within the existing base even as new logo acquisition remained flat. The sales team closed 14 new accounts against a target of 16, with the shortfall concentrated in the enterprise segment where two deals pushed to December. Customer satisfaction is a bright spot: NPS improved 7 points to 54, the highest score in 18 months, driven by improvements to onboarding time.",
+    highlights: [
+      "ARR grew 8.2% MoM — highest since Feb 2026",
+      "NPS reached 54, up 7 points — 18-month high",
+      "NRR held at 112% — expansion outpacing churn",
+    ],
+    concerns: [
+      "New logo acquisition missed target by 2 accounts (enterprise pipeline soft)",
+      "CAC increased 14% YoY — paid channel efficiency declining",
+      "Support ticket volume up 22% with no headcount increase",
+    ],
+    board_asks: [
+      "Approve one additional enterprise AE headcount for Q1 2027 to address pipeline gap",
+      "Review CAC trend vs. LTV at next board session — decision point for paid channel strategy",
+    ],
+    kpis: [
+      { name: "ARR", value: "$4.1M", change: "+8.2%", trend: "up" },
+      { name: "NRR", value: "112%", change: "+1pt", trend: "up" },
+      { name: "NPS", value: "54", change: "+7", trend: "up" },
+      { name: "New Logos", value: "14", change: "-2 vs target", trend: "down" },
+      { name: "CAC", value: "$3,200", change: "+14% YoY", trend: "down" },
+    ],
+  },
+};
+
+function ToolModal({ tool, onClose }) {
+  const [view, setView] = useState("form");
+  const data = TOOL_SAMPLES[tool.name];
+
+  const handleRun = (e) => { e.preventDefault(); setView("result"); };
+
+  const renderResult = () => {
+    if (!data) return <p className="result-text">Sample output coming soon.</p>;
+
+    if (tool.name === "Deal Coach") {
+      const pct = data.win_probability;
+      const color = pct >= 70 ? "#4ade80" : pct >= 45 ? "#fb923c" : "#f87171";
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title">Summary</div>
+            <p className="result-text">{data.summary}</p>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Win Probability</div>
+            <div className="gauge-wrap">
+              <div className="gauge-pct" style={{ color }}>{pct}%</div>
+              <div className="gauge-label">{data.stage} · {data.health === "watch" ? "⚠ Watch" : data.health}</div>
+            </div>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Deal Signals</div>
+            {data.signals.map((s, i) => (
+              <div key={i} className="result-signal">
+                <div className={`signal-dot ${s.type}`} />
+                <span>{s.text}</span>
+              </div>
+            ))}
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Next Best Actions</div>
+            {data.next_actions.map((a, i) => (
+              <div key={i} className={`action-card ${a.priority}`}>
+                <div className={`priority-${a.priority}`}>{a.priority.toUpperCase()}</div>
+                <strong>{a.action}</strong>
+                <p style={{ margin: "4px 0 0", fontSize: "0.82rem", opacity: 0.8 }}>{a.rationale}</p>
+              </div>
+            ))}
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Objection Playbook</div>
+            {data.objections.map((o, i) => (
+              <div key={i} className="objection-item">
+                <div className="objection-q">"{o.objection}"</div>
+                <div className="objection-a">{o.response}</div>
+              </div>
+            ))}
+          </div>
+        </>
+      );
+    }
+
+    if (tool.name === "Proposal Generator") {
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title" style={{ fontSize: "1.1rem" }}>{data.title}</div>
+            <p className="result-text" style={{ opacity: 0.6, marginTop: 2 }}>Prepared for: {data.prepared_for}</p>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Executive Summary</div>
+            <p className="result-text">{data.executive_summary}</p>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">ROI Headline</div>
+            <div className="roi-headline">{data.roi.headline} · {data.roi.annual_value}/yr value · Payback: {data.roi.payback_period}</div>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Pricing Options</div>
+            <div className="pricing-grid">
+              {data.pricing_tiers.map((t, i) => (
+                <div key={i} className={`pricing-tier${t.recommended ? " rec" : ""}`}>
+                  {t.recommended && <div className="pricing-rec-badge">Recommended</div>}
+                  <div className="tier-name">{t.name}</div>
+                  <div className="tier-price">{t.price} <span className="tier-cadence">{t.cadence}</span></div>
+                  <div className="tier-best">{t.best_for}</div>
+                  <ul className="tier-features">{t.features.map((f, j) => <li key={j}>{f}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Implementation Timeline</div>
+            {data.timeline.map((t, i) => (
+              <div key={i} className="timeline-item">
+                <div className="timeline-dot" />
+                <div className="timeline-content">
+                  <div className="timeline-phase">{t.phase} <span className="timeline-duration">{t.duration}</span></div>
+                  <div className="timeline-detail">{t.detail}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Next Steps</div>
+            <ul className="result-list">{data.next_steps.map((s, i) => <li key={i}>{s}</li>)}</ul>
+          </div>
+        </>
+      );
+    }
+
+    if (tool.name === "Churn Risk Explainer") {
+      return data.accounts.map((acc, i) => (
+        <div key={i} className="result-card">
+          <div className="result-row">
+            <strong>{acc.name}</strong>
+            <span className={`result-pill ${acc.risk}`}>{acc.risk.toUpperCase()} RISK — {acc.score}</span>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", margin: "8px 0" }}>
+            {acc.signals.map((s, j) => <span key={j} className="result-pill blue">{s}</span>)}
+          </div>
+          <div className="ticket-draft">
+            <strong style={{ display: "block", marginBottom: 6 }}>Save Email Draft:</strong>
+            <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, fontSize: "0.82rem" }}>{acc.save_email}</pre>
+          </div>
+        </div>
+      ));
+    }
+
+    if (tool.name === "Support Ticket Triage") {
+      return data.tickets.map((t, i) => (
+        <div key={i} className="ticket-card">
+          <div className="ticket-meta">
+            <span>{t.id}</span>
+            <span className={`result-pill ${t.urgency === "critical" ? "red" : t.urgency === "high" ? "amber" : "green"}`}>{t.urgency.toUpperCase()}</span>
+            <span className="result-pill blue">{t.sentiment}</span>
+            <span>→ {t.route}</span>
+          </div>
+          <div className="ticket-title">{t.subject}</div>
+          <div className="ticket-draft">
+            <strong style={{ display: "block", marginBottom: 6 }}>Suggested Reply:</strong>
+            <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, fontSize: "0.82rem" }}>{t.draft}</pre>
+          </div>
+        </div>
+      ));
+    }
+
+    if (tool.name === "Meeting Intelligence") {
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title">{data.meeting_title} · {data.duration}</div>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Decisions Made</div>
+            <ul className="result-list">{data.decisions.map((d, i) => <li key={i}>{d}</li>)}</ul>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Action Items</div>
+            {data.action_items.map((a, i) => (
+              <div key={i} className="result-row" style={{ padding: "6px 0", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                <span style={{ fontWeight: 600 }}>{a.owner}</span>
+                <span style={{ flex: 1, margin: "0 12px", opacity: 0.85 }}>{a.action}</span>
+                <span style={{ opacity: 0.5, whiteSpace: "nowrap" }}>Due {a.due}</span>
+              </div>
+            ))}
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Speaker Sentiment</div>
+            {data.speakers.map((s, i) => (
+              <div key={i} className="speaker-card">
+                <div className="speaker-name">{s.name} <span className={`result-pill ${s.sentiment === "positive" ? "green" : s.sentiment === "cautious" ? "amber" : "blue"}`}>{s.sentiment}</span></div>
+                <div className="speaker-sentiment">{s.key_point}</div>
+              </div>
+            ))}
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Follow-Up Email Draft</div>
+            <div className="ticket-draft">
+              <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", margin: 0, fontSize: "0.82rem" }}>{data.follow_up_email}</pre>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    if (tool.name === "SOP Generator") {
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title" style={{ fontSize: "1.05rem" }}>{data.title}</div>
+            <p className="result-text" style={{ opacity: 0.6 }}>{data.version} · Owner: {data.owner} · {data.frequency}</p>
+            <p className="result-text">{data.purpose}</p>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Steps</div>
+            {data.steps.map((s, i) => (
+              <div key={i} className="sop-step">
+                <div className="sop-step-num">{s.num}</div>
+                <div className="sop-step-content">
+                  <div className="sop-step-title">{s.title} <span style={{ opacity: 0.5, fontWeight: 400, fontSize: "0.8rem" }}>· {s.role} · {s.duration}</span></div>
+                  <div className="sop-step-detail">{s.detail}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Edge Cases</div>
+            <ul className="result-list">{data.edge_cases.map((e, i) => <li key={i}>{e}</li>)}</ul>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Success Metrics</div>
+            <ul className="result-list">{data.metrics.map((m, i) => <li key={i}>{m}</li>)}</ul>
+          </div>
+        </>
+      );
+    }
+
+    if (tool.name === "Competitive Intelligence") {
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title">SWOT — Your Position vs. {data.competitor}</div>
+            <div className="swot-grid">
+              {[["Strengths", data.swot.strengths, "green"], ["Weaknesses", data.swot.weaknesses, "red"], ["Opportunities", data.swot.opportunities, "blue"], ["Threats", data.swot.threats, "amber"]].map(([label, items, color]) => (
+                <div key={label} className="swot-cell">
+                  <div className="swot-cell-label" style={{ color: color === "green" ? "#4ade80" : color === "red" ? "#f87171" : color === "blue" ? "#60a5fa" : "#fb923c" }}>{label}</div>
+                  <ul className="result-list">{items.map((item, i) => <li key={i}>{item}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Positioning Gaps to Exploit</div>
+            <ul className="result-list">{data.positioning_gaps.map((p, i) => <li key={i}>{p}</li>)}</ul>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Battlecard</div>
+            <div className="result-row" style={{ gap: 12, flexWrap: "wrap", alignItems: "flex-start" }}>
+              <div style={{ flex: 1 }}>
+                <strong>Win Themes</strong>
+                <ul className="result-list">{data.battlecard.win_themes.map((t, i) => <li key={i}>{t}</li>)}</ul>
+              </div>
+              <div style={{ flex: 1 }}>
+                <strong>Trap Questions</strong>
+                <ul className="result-list">{data.battlecard.trap_questions.map((q, i) => <li key={i}>{q}</li>)}</ul>
+              </div>
+            </div>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">The Wedge</div>
+            <p className="result-text">{data.wedge}</p>
+          </div>
+        </>
+      );
+    }
+
+    if (tool.name === "Content Repurposer") {
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title">Source Content</div>
+            <p className="result-text" style={{ fontStyle: "italic" }}>"{data.source}"</p>
+          </div>
+          {data.channels.map((ch, i) => (
+            <div key={i} className="content-channel-card">
+              <div className="content-channel-label">{ch.channel}</div>
+              <div className="content-body">{ch.body}</div>
+            </div>
+          ))}
+          <div className="result-section">
+            <div className="result-section-title">Hashtags</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+              {data.hashtags.map((h, i) => <span key={i} className="result-pill blue">{h}</span>)}
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    if (tool.name === "Budget Variance Analyst") {
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title">Variance Analysis — {data.period}</div>
+            <table className="variance-table">
+              <thead><tr><th>Category</th><th>Budget</th><th>Actual</th><th>Variance</th></tr></thead>
+              <tbody>
+                {data.variances.map((v, i) => (
+                  <tr key={i}>
+                    <td>{v.category}</td>
+                    <td>${v.budget.toLocaleString()}</td>
+                    <td>${v.actual.toLocaleString()}</td>
+                    <td className={v.type === "over" ? "over" : "under"}>{v.type === "over" ? "+" : "-"}${Math.abs(v.variance).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {data.variances.map((v, i) => (
+            <div key={i} className="result-card">
+              <div className="result-row"><strong>{v.category}</strong><span className={`result-pill ${v.type === "over" ? "red" : "green"}`}>{v.type === "over" ? "Over" : "Under"}</span></div>
+              <p className="result-text">{v.explanation}</p>
+            </div>
+          ))}
+          <div className="result-section">
+            <div className="result-section-title">Executive Summary</div>
+            <p className="result-text">{data.summary}</p>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Board Ask</div>
+            <p className="result-text" style={{ fontWeight: 600 }}>{data.exec_ask}</p>
+          </div>
+        </>
+      );
+    }
+
+    if (tool.name === "KPI Narrator") {
+      return (
+        <>
+          <div className="result-section">
+            <div className="result-section-title">KPI Summary — {data.period}</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+              {data.kpis.map((k, i) => (
+                <div key={i} className="result-card" style={{ flex: "1 1 140px", textAlign: "center" }}>
+                  <div style={{ fontSize: "1.3rem", fontWeight: 700 }}>{k.value}</div>
+                  <div style={{ fontSize: "0.78rem", opacity: 0.6 }}>{k.name}</div>
+                  <div className={`result-pill ${k.trend === "up" ? "green" : "red"}`} style={{ marginTop: 4 }}>{k.change}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Board Narrative</div>
+            <p className="result-text">{data.narrative}</p>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Highlights</div>
+            <ul className="result-list">{data.highlights.map((h, i) => <li key={i}>{h}</li>)}</ul>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Concerns</div>
+            <ul className="result-list">{data.concerns.map((c, i) => <li key={i}>{c}</li>)}</ul>
+          </div>
+          <div className="result-section">
+            <div className="result-section-title">Board Asks</div>
+            <ul className="result-list">{data.board_asks.map((a, i) => <li key={i}>{a}</li>)}</ul>
+          </div>
+        </>
+      );
+    }
+
+    return <p className="result-text">Sample output for {tool.name}.</p>;
+  };
+
+  const renderForm = () => {
+    const forms = {
+      "Deal Coach": (
+        <>
+          <div className="tool-field"><label className="tool-label">Company / Prospect</label><input className="tool-input" defaultValue="Meridian Health Partners" /></div>
+          <div className="tool-field"><label className="tool-label">Deal Stage</label><select className="tool-select"><option>Proposal</option><option>Discovery</option><option>Negotiation</option><option>Closing</option></select></div>
+          <div className="tool-field"><label className="tool-label">Deal Notes</label><textarea className="tool-textarea" defaultValue="Champion is Sarah Chen, VP Ops. Has exec access. No formal eval criteria shared yet. Economic buyer (CFO) has gone quiet for 2 weeks. Competitor Salesforce also in play." /></div>
+        </>
+      ),
+      "Proposal Generator": (
+        <>
+          <div className="tool-field"><label className="tool-label">Company Name</label><input className="tool-input" defaultValue="Meridian Health Partners" /></div>
+          <div className="tool-field"><label className="tool-label">Contact / Title</label><input className="tool-input" defaultValue="Sarah Chen, VP of Operations" /></div>
+          <div className="tool-field"><label className="tool-label">Pain Points & Goals</label><textarea className="tool-textarea" defaultValue="Manual reporting taking 1,200 hrs/quarter. No single source of truth. FHIR compliance deadline in 6 months." /></div>
+        </>
+      ),
+      "Churn Risk Explainer": (
+        <>
+          <div className="tool-field"><label className="tool-label">Accounts to Analyze (one per line)</label><textarea className="tool-textarea" defaultValue={"Brightline Logistics, Enterprise\nOakwood Financial, Mid-Market\nCascade Media, SMB"} /></div>
+          <div className="tool-field"><label className="tool-label">Usage Data Source</label><select className="tool-select"><option>CRM Export</option><option>Product Analytics</option><option>Manual Entry</option></select></div>
+        </>
+      ),
+      "Support Ticket Triage": (
+        <>
+          <div className="tool-field"><label className="tool-label">Ticket Content</label><textarea className="tool-textarea" defaultValue={"TKT-4421 | Brightline Logistics | All dashboard data disappeared after update — URGENT\nTKT-4418 | Oakwood Financial | Charged twice for same invoice\nTKT-4415 | Cascade Media | How do I export to CSV?"} /></div>
+        </>
+      ),
+      "Meeting Intelligence": (
+        <>
+          <div className="tool-field"><label className="tool-label">Meeting Title</label><input className="tool-input" defaultValue="Q4 Strategy Review" /></div>
+          <div className="tool-field"><label className="tool-label">Transcript or Notes</label><textarea className="tool-textarea" defaultValue="Sarah: We should reallocate $120K from print to digital — our Q3 test showed 3.2x ROAS. Marcus: I'm concerned about the CRM timeline — we need security review first. Alex: The dashboard demo went well, finance team is ready to pilot." /></div>
+        </>
+      ),
+      "SOP Generator": (
+        <>
+          <div className="tool-field"><label className="tool-label">Process Name</label><input className="tool-input" defaultValue="Monthly Financial Close" /></div>
+          <div className="tool-field"><label className="tool-label">Process Description</label><textarea className="tool-textarea" defaultValue="Month-end accounting close: freeze transactions, reconcile bank statements, review AR aging, post accruals, run trial balance and distribute to leadership." /></div>
+          <div className="tool-field"><label className="tool-label">Team / Owner</label><input className="tool-input" defaultValue="Finance Team" /></div>
+        </>
+      ),
+      "Competitive Intelligence": (
+        <>
+          <div className="tool-field"><label className="tool-label">Competitor</label><input className="tool-input" defaultValue="Salesforce (Sales Cloud)" /></div>
+          <div className="tool-field"><label className="tool-label">Your Product / Positioning</label><textarea className="tool-textarea" defaultValue="Mid-market CRM with native AI, faster implementation, lower TCO, and dedicated CSM for all tiers." /></div>
+        </>
+      ),
+      "Content Repurposer": (
+        <>
+          <div className="tool-field"><label className="tool-label">Source Content</label><textarea className="tool-textarea" defaultValue="New research: AI-assisted teams ship 3x faster than those who don't — but only if the human stays in the decision seat. The model is the engine. You are the driver." /></div>
+          <div className="tool-field"><label className="tool-label">Target Channels</label><select className="tool-select"><option>All Channels</option><option>LinkedIn Only</option><option>Email + Social</option></select></div>
+        </>
+      ),
+      "Budget Variance Analyst": (
+        <>
+          <div className="tool-field"><label className="tool-label">Period</label><input className="tool-input" defaultValue="Q3 2026" /></div>
+          <div className="tool-field"><label className="tool-label">Budget vs. Actuals (paste CSV or describe)</label><textarea className="tool-textarea" defaultValue={"Sales & Marketing: Budget $180K, Actual $214K\nEngineering: Budget $320K, Actual $298K\nG&A: Budget $95K, Actual $97.2K\nCOGS: Budget $410K, Actual $388K"} /></div>
+        </>
+      ),
+      "KPI Narrator": (
+        <>
+          <div className="tool-field"><label className="tool-label">Period</label><input className="tool-input" defaultValue="November 2026" /></div>
+          <div className="tool-field"><label className="tool-label">KPIs (paste data)</label><textarea className="tool-textarea" defaultValue={"ARR: $4.1M (+8.2% MoM)\nNRR: 112% (+1pt)\nNPS: 54 (+7)\nNew Logos: 14 (-2 vs target of 16)\nCAC: $3,200 (+14% YoY)"} /></div>
+        </>
+      ),
+    };
+    return forms[tool.name] || <div className="tool-field"><label className="tool-label">Input</label><textarea className="tool-textarea" placeholder="Paste your data here…" /></div>;
+  };
+
+  return (
+    <div className="tool-modal-overlay" onClick={(e) => { if (e.target.classList.contains("tool-modal-overlay")) onClose(); }}>
+      <div className="tool-modal">
+        <div className="tool-modal-header">
+          <div>
+            <span style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", opacity: 0.5 }}>AI Tool Demo</span>
+            <h3 style={{ margin: "2px 0 0", fontSize: "1.15rem", fontWeight: 700 }}>{tool.name}</h3>
+          </div>
+          <button className="tool-modal-close" onClick={onClose}>✕</button>
+        </div>
+        <div className="tool-modal-body">
+          {view === "form" ? (
+            <form onSubmit={handleRun} className="tool-form">
+              <p className="result-text" style={{ marginBottom: 16 }}>{tool.desc}</p>
+              {renderForm()}
+              <div className="tool-actions">
+                <button type="submit" className="tool-btn-primary">Run →</button>
+              </div>
+            </form>
+          ) : (
+            <div>
+              <button className="result-back" onClick={() => setView("form")}>← Back</button>
+              {renderResult()}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState("work");
+  const [activeTool, setActiveTool] = useState(null);
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
   const [cursorExpanded, setCursorExpanded] = useState(false);
   const ringRef = useRef(null);
@@ -1229,12 +2157,11 @@ export default function Portfolio() {
               <div className="b2b-category-label">{cat.label}</div>
               <div className="b2b-grid">
                 {cat.tools.map((tool) => (
-                  <a
+                  <button
                     key={tool.name}
                     className="b2b-card"
-                    href={`https://primelayer.solutions${tool.path}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={() => setActiveTool(tool)}
+                    style={{ cursor: "pointer", textAlign: "left", background: "none", border: "none", padding: 0, width: "100%" }}
                   >
                     <div className="b2b-card-top">
                       <span className="b2b-glyph">{tool.glyph}</span>
@@ -1242,7 +2169,7 @@ export default function Portfolio() {
                     </div>
                     <p className="b2b-card-desc">{tool.desc}</p>
                     <span className="b2b-card-cta">Try it live →</span>
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>
@@ -1255,6 +2182,8 @@ export default function Portfolio() {
         <p>© 2026 — Alexander Tobin</p>
         <p>atobin@alum.utk.edu</p>
       </footer>
+
+      {activeTool && <ToolModal tool={activeTool} onClose={() => setActiveTool(null)} />}
     </>
   );
 }
