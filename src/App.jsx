@@ -1526,7 +1526,7 @@ function ToolModal({ tool, onClose }) {
   const [view, setView] = useState("form");
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
-  const formRef = React.useRef(null);
+  const formRef = useRef(null);
 
   const collectFields = () => {
     if (!formRef.current) return {};
